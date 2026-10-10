@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0E0E0E"></rect><text x="50" y="60" text-anchor="middle" font-family="Georgia,serif" font-size="26" fill="#fff">R<tspan fill="#D7141A" font-style="italic">&amp;</tspan>W</text></svg></template>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<script src="./image-slot.js?v=2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#fff;color:#0E0E0E;font-family:Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#0E0E0E;text-decoration:none}
+a:hover{color:#D7141A}
+input,button{font-family:inherit}
+[dir=rtl] *{letter-spacing:0!important}
+@keyframes rwFade{from{opacity:0}to{opacity:1}}
+@keyframes rwRise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes rwSlide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+</style>
+</helmet>
+<div dir="{{ dir }}" lang="{{ lang }}" style="font-family:{{ font }}">
+
+<div dir="ltr" style="background:#0E0E0E;color:#fff;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;overflow:hidden;white-space:nowrap;padding:10px 0">
+  <div style="display:inline-flex;gap:48px;animation:rwSlide 28s linear infinite;padding-left:48px">
+    <span>{{ t.bar1 }}</span><span style="color:#D7141A">●</span><span>{{ t.bar2 }}</span><span style="color:#D7141A">●</span><span>{{ t.bar3 }}</span><span style="color:#D7141A">●</span><span>{{ t.bar4 }}</span><span style="color:#D7141A">●</span>
+    <span>{{ t.bar1 }}</span><span style="color:#D7141A">●</span><span>{{ t.bar2 }}</span><span style="color:#D7141A">●</span><span>{{ t.bar3 }}</span><span style="color:#D7141A">●</span><span>{{ t.bar4 }}</span><span style="color:#D7141A">●</span>
+  </div>
+</div>
+
+<header style="position:sticky;top:0;z-index:40;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid #ECEAE5">
+  <div style="max-width:1400px;margin:0 auto;padding:14px 32px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px">
+    <sc-if value="{{ notPhone }}" hint-placeholder-val="{{ true }}">
+    <nav style="display:flex;gap:32px;flex-wrap:wrap;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase">
+      <a href="#order">{{ t.navShop }}</a>
+      <a href="#avis">{{ t.navReviews }}</a>
+      <a href="#faq">{{ t.navAbout }}</a>
+    </nav>
+    </sc-if>
+    <sc-if value="{{ phone }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;align-items:center">
+        <button onClick="{{ toggleMenu }}" aria-label="Menu" style="width:44px;height:44px;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:6px;padding:0 4px">
+          <span style="display:block;width:24px;height:2px;background:#0E0E0E;transition:transform .3s;transform:{{ bar1 }}"></span>
+          <span style="display:block;width:16px;height:2px;background:#D7141A;transition:opacity .2s;opacity:{{ bar2 }}"></span>
+          <span style="display:block;width:24px;height:2px;background:#0E0E0E;transition:transform .3s;transform:{{ bar3 }}"></span>
+        </button>
+      </div>
+    </sc-if>
+    <a href="#top" dir="ltr" style="display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1;font-family:Manrope,sans-serif">
+      <div style="position:relative;width:40px;height:22px;margin-bottom:-2px">
+        <div style="position:absolute;left:8px;top:0;width:14px;height:14px;background:#D7141A"></div>
+        <div style="position:absolute;left:16px;top:5px;width:17px;height:15px;border-radius:50%;background:#0E0E0E"></div>
+      </div>
+      <div style="font-size:38px;font-weight:500;letter-spacing:-.01em;color:#0E0E0E">R<span style="color:#D7141A;font-family:'Playfair Display',serif;font-style:italic">&amp;</span>W</div>
+      <div style="display:flex;align-items:center;gap:6px;width:96px"><span style="flex:1;height:1px;background:#0E0E0E"></span><span style="font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:#0E0E0E">Parfums</span></div>
+    </a>
+    <div style="display:flex;justify-content:flex-end;align-items:center;gap:14px">
+      <div style="position:relative">
+        <button onClick="{{ toggleLang }}" aria-label="Langue / Language / اللغة" style="background:none;border:1px solid #ECEAE5;cursor:pointer;height:38px;padding:0 10px;display:flex;align-items:center;gap:6px;color:#0E0E0E;font-size:12px;font-weight:800;letter-spacing:.08em" style-hover="border-color:#0E0E0E">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E0E0E" stroke-width="1.6"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"></path></svg>
+          <span>{{ langCode }}</span>
+        </button>
+        <sc-if value="{{ langOpen }}" hint-placeholder-val="{{ false }}">
+          <div onClick="{{ closeLang }}" style="position:fixed;inset:0;z-index:1"></div>
+          <div style="position:absolute;top:46px;inset-inline-end:0;z-index:2;background:#fff;border:1px solid #ECEAE5;box-shadow:0 14px 34px rgba(0,0,0,.1);min-width:160px;display:flex;flex-direction:column;padding:6px">
+            <div style="position:absolute;top:0;inset-inline-start:0;width:32px;height:3px;background:#D7141A"></div>
+            <sc-for list="{{ langs }}" as="l" hint-placeholder-count="3">
+              <button onClick="{{ l.pick }}" style="background:{{ l.bg }};border:none;cursor:pointer;padding:12px 12px;display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:14px;font-weight:700;color:#0E0E0E;font-family:{{ l.font }}" style-hover="background:#F5F4F1">
+                <span>{{ l.label }}</span><span style="font-size:11px;color:#D7141A;font-family:Manrope,sans-serif">{{ l.mark }}</span>
+              </button>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+      <button onClick="{{ scrollToOrder }}" style="position:relative;background:none;border:none;cursor:pointer;padding:6px;display:flex">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0E0E0E" stroke-width="1.6"><path d="M5 8h14l-1.2 12H6.2L5 8z"></path><path d="M9 8V6a3 3 0 0 1 6 0v2"></path></svg>
+        <span style="position:absolute;top:0;right:-4px;min-width:18px;height:18px;border-radius:9px;background:#D7141A;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 4px;font-family:Manrope,sans-serif">{{ packCount }}</span>
+      </button>
+    </div>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <nav onClick="{{ closeMenu }}" style="position:absolute;top:100%;left:0;right:0;background:#fff;border-top:1px solid #ECEAE5;box-shadow:0 18px 40px rgba(0,0,0,.12);display:flex;flex-direction:column;padding:8px 24px 24px">
+      <a href="#order" style="display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid #ECEAE5;font-size:15px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#0E0E0E"><span>{{ t.navShop }}</span><span style="color:#D7141A">→</span></a>
+      <a href="#avis" style="display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid #ECEAE5;font-size:15px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#0E0E0E"><span>{{ t.navReviews }}</span><span style="color:#D7141A">→</span></a>
+      <a href="#faq" style="display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid #ECEAE5;font-size:15px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#0E0E0E"><span>{{ t.navAbout }}</span><span style="color:#D7141A">→</span></a>
+      <a href="#order" style="margin-top:20px;display:flex;justify-content:center;align-items:center;height:52px;background:#D7141A;color:#fff;font-size:14px;font-weight:800;letter-spacing:.16em;text-transform:uppercase">{{ t.orderNow }}</a>
+    </nav>
+  </sc-if>
+</header>
+<sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeMenu }}" style="position:fixed;inset:0;z-index:39;background:rgba(14,14,14,.35)"></div>
+</sc-if>
+
+<main id="top">
+<section id="order" style="max-width:1400px;margin:0 auto;padding:{{ orderPad }};display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr));gap:56px;align-items:start">
+
+  <div style="display:flex;gap:{{ galGap }};position:{{ galleryPos }};top:120px">
+    <div style="flex:none;width:{{ thumbW }};position:relative;align-self:stretch"><div style="position:absolute;inset:0;display:flex;flex-direction:column;gap:12px;overflow-y:auto;scrollbar-width:none">
+      <sc-for list="{{ thumbs }}" as="t" hint-placeholder-count="4">
+        <button onClick="{{ t.select }}" style="flex:none;width:{{ thumbW }};height:{{ thumbH }};padding:0;border:{{ t.border }};background:#F5F4F1;cursor:pointer;display:block;position:relative;overflow:hidden;opacity:{{ t.thumbOpacity }};transition:opacity .4s ease, border-color .4s ease">
+          <div style="position:absolute;inset:0;pointer-events:none">
+            <image-slot id="{{ t.slotId }}" src="{{ t.src }}" data-dup="1" shape="rect" placeholder="{{ t.n }}"></image-slot>
+          </div>
+        </button>
+      </sc-for>
+    </div></div>
+    <div style="flex:1;min-width:0;position:relative;aspect-ratio:{{ mainAspect }};background:#F2F1EE">
+      <sc-for list="{{ thumbs }}" as="t" hint-placeholder-count="1">
+        <div style="position:absolute;inset:0;opacity:{{ t.opacity }};z-index:{{ t.z }};transform:scale({{ t.scale }});transition:opacity 1.2s ease, transform 6s ease-out">
+          <image-slot id="{{ t.slotId }}" src="{{ t.src }}" shape="rect" placeholder="{{ t.ph }}"></image-slot>
+        </div>
+      </sc-for>
+      <div style="position:absolute;top:18px;inset-inline-start:18px;z-index:5;display:flex;flex-direction:column;align-items:center;gap:2px;background:#D7141A;color:#fff;padding:9px 13px 8px;pointer-events:none;font-family:Manrope,sans-serif;box-shadow:0 6px 18px rgba(215,20,26,.35);isolation:isolate">
+        <span style="font-size:17px;font-weight:800;letter-spacing:.04em;line-height:1">−43%</span>
+        <span style="font-size:8px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;line-height:1;opacity:.92">Promo</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;align-items:center;text-align:center;max-width:640px;width:100%;justify-self:center">
+    <div style="display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:#0E0E0E">
+      <span dir="ltr" style="color:#D7141A;letter-spacing:2px">★★★★★</span><span>{{ t.rating }}</span>
+    </div>
+    <h1 style="margin:16px 0 8px;font-size:clamp(36px,4vw,54px);font-weight:{{ titleWeight }};letter-spacing:.02em;text-transform:uppercase;line-height:1.25">{{ t.title }}</h1>
+    <div style="font-size:17px;color:#6B6B6B;font-weight:400">{{ t.sizes }}</div>
+    <div style="display:flex;align-items:baseline;gap:14px;margin-top:22px">
+      <span style="font-size:34px;font-weight:800">{{ price }} {{ t.cur }}</span>
+      <span style="font-size:18px;color:#9A9893;text-decoration:line-through">{{ oldPrice }} {{ t.cur }}</span><span style="font-size:12px;font-weight:800;letter-spacing:.08em;color:#fff;background:#D7141A;padding:5px 9px;align-self:center">-43%</span>
+    </div>
+    <div style="width:44px;height:3px;background:#D7141A;margin:18px 0 24px"></div>
+    <p style="margin:0;font-size:17px;line-height:1.75;color:#3F3F3F;font-weight:300;text-wrap:pretty;max-width:52ch">{{ t.i1 }}<b style="color:#D7141A;font-weight:700">{{ t.i2 }}</b>{{ t.i3 }}<b style="color:#D7141A;font-weight:700">4</b>{{ t.i4 }}<b style="color:#D7141A;font-weight:700">4</b>{{ t.i5 }}</p>
+
+    <div style="width:100%;margin-top:32px;background:#0E0E0E;color:#fff;padding:30px 28px 26px;position:relative">
+      <div style="position:absolute;top:0;inset-inline-start:0;width:56px;height:6px;background:#D7141A"></div>
+      <div style="font-size:14px;font-weight:800;letter-spacing:.2em;text-transform:uppercase">{{ t.compose }}</div>
+      <div style="display:flex;justify-content:center;align-items:center;gap:10px;margin-top:22px;flex-wrap:wrap">
+        <sc-for list="{{ slots }}" as="s" hint-placeholder-count="4">
+          <sc-if value="{{ s.plus }}" hint-placeholder-val="{{ false }}"><span style="color:#D7141A;font-size:22px;font-weight:300">+</span></sc-if>
+          <button onClick="{{ s.open }}" style="width:132px;min-height:206px;background:{{ s.bg }};border:{{ s.border }};color:#0E0E0E;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:0;position:relative;overflow:hidden;transition:transform .2s" style-hover="transform:translateY(-3px)">
+            <sc-if value="{{ s.filled }}" hint-placeholder-val="{{ false }}">
+              <div style="width:100%;aspect-ratio:1/1;background:#fff;position:relative;flex:none">
+                <img src="{{ s.img }}" alt="{{ s.name }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+                <span style="position:absolute;top:6px;inset-inline-start:6px;background:#D7141A;color:#fff;font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:3px 6px">{{ s.family }}</span>
+                <span role="button" aria-label="Retirer" onClick="{{ s.remove }}" style="position:absolute;top:5px;inset-inline-end:5px;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.92);border:1px solid #DAD8D2;display:flex;align-items:center;justify-content:center;color:#0E0E0E;cursor:pointer;transition:background .2s,color .2s" style-hover="background:#0E0E0E;color:#fff"><svg width="9" height="9" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1 1l8 8M9 1L1 9"></path></svg></span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 8px 10px;flex:1;justify-content:center">
+                <span style="font-size:12px;font-weight:800;text-transform:uppercase;line-height:1.15">{{ s.name }}</span>
+                <span style="font-size:9px;font-weight:600;color:#6B6B6B;text-transform:uppercase;letter-spacing:.06em;line-height:1.2">{{ s.brand }}</span>
+                <span style="font-size:10px;color:#6B6B6B;text-decoration:underline;margin-top:2px">{{ t.change }}</span>
+              </div>
+            </sc-if>
+            <sc-if value="{{ s.empty }}" hint-placeholder-val="{{ true }}">
+              <span style="font-size:40px;font-weight:200;color:#fff;line-height:1">+</span>
+              <span style="font-size:11px;color:#BDBDBD;letter-spacing:.08em">{{ s.labelText }}</span>
+            </sc-if>
+          </button>
+        </sc-for>
+      </div>
+      <div style="margin-top:20px;font-size:14px;font-weight:600;color:#fff">{{ packHint }}</div>
+    </div>
+
+    <div id="rw-form" style="width:100%;display:flex;gap:16px;align-items:flex-end;margin-top:26px;flex-wrap:wrap">
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">
+        <span style="font-size:13px;color:#6B6B6B">{{ t.qty }}</span>
+        <div dir="ltr" style="display:flex;border:1px solid #DAD8D2;height:56px">
+          <button onClick="{{ dec }}" style="width:52px;background:#fff;border:none;font-size:22px;cursor:pointer">−</button>
+          <div style="width:52px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px;border-left:1px solid #DAD8D2;border-right:1px solid #DAD8D2">{{ qty }}</div>
+          <button onClick="{{ inc }}" style="width:52px;background:#fff;border:none;font-size:22px;cursor:pointer">+</button>
+        </div>
+      </div>
+      <div style="flex:1;min-width:240px;display:flex;flex-direction:column;gap:8px;text-align:start">
+        <span style="font-size:13px;color:#6B6B6B">{{ t.quick }}</span>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px">
+          <input value="{{ form.name }}" onChange="{{ setName }}" placeholder="{{ t.name }}" style="height:56px;border:{{ nameBorder }};padding:0 14px;font-size:15px;outline:none">
+          <input value="{{ form.phone }}" onChange="{{ setPhone }}" placeholder="{{ t.phone }}" inputmode="tel" style="height:56px;border:{{ phoneBorder }};padding:0 14px;font-size:15px;outline:none">
+          <input value="{{ form.city }}" onChange="{{ setCity }}" placeholder="{{ t.city }}" style="height:56px;border:{{ cityBorder }};padding:0 14px;font-size:15px;outline:none">
+        </div>
+      </div>
+    </div>
+    <sc-if value="{{ hasError }}" hint-placeholder-val="{{ false }}">
+      <div style="width:100%;text-align:start;margin-top:10px;font-size:13px;font-weight:600;color:#D7141A">{{ errorMsg }}</div>
+    </sc-if>
+
+    <button onClick="{{ submit }}" style="width:100%;margin-top:16px;height:64px;background:#D7141A;color:#fff;border:none;font-size:16px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:14px;transition:background .2s" style-hover="background:#0E0E0E">
+      {{ submitLabel }}
+    </button>
+
+    <div style="width:100%;margin-top:26px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:#ECEAE5;border:1px solid #ECEAE5">
+      <div style="background:#fff;padding:16px 10px;display:flex;flex-direction:column;gap:4px"><span style="font-size:13px;font-weight:800">{{ t.tr1a }}</span><span style="font-size:12px;color:#6B6B6B">{{ t.tr1b }}</span></div>
+      <div style="background:#fff;padding:16px 10px;display:flex;flex-direction:column;gap:4px"><span style="font-size:13px;font-weight:800">{{ t.tr2a }}</span><span style="font-size:12px;color:#6B6B6B">{{ t.tr2b }}</span></div>
+      <div style="background:#fff;padding:16px 10px;display:flex;flex-direction:column;gap:4px"><span style="font-size:13px;font-weight:800">{{ t.tr3a }}</span><span style="font-size:12px;color:#6B6B6B">{{ t.tr3b }}</span></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:88px 32px;border-bottom:1px solid #ECEAE5">
+  <div style="max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:40px">
+    <div style="display:flex;flex-direction:column;gap:12px"><span style="font-family:'Playfair Display',serif;font-style:italic;font-size:44px;color:#D7141A;line-height:1">01</span><span style="font-size:17px;font-weight:800;text-transform:uppercase;letter-spacing:.06em">{{ t.s1a }}</span><span style="font-size:15px;color:#3F3F3F;line-height:1.6">{{ t.s1b }}</span></div>
+    <div style="display:flex;flex-direction:column;gap:12px"><span style="font-family:'Playfair Display',serif;font-style:italic;font-size:44px;color:#D7141A;line-height:1">02</span><span style="font-size:17px;font-weight:800;text-transform:uppercase;letter-spacing:.06em">{{ t.s2a }}</span><span style="font-size:15px;color:#3F3F3F;line-height:1.6">{{ t.s2b }}</span></div>
+    <div style="display:flex;flex-direction:column;gap:12px"><span style="font-family:'Playfair Display',serif;font-style:italic;font-size:44px;color:#D7141A;line-height:1">03</span><span style="font-size:17px;font-weight:800;text-transform:uppercase;letter-spacing:.06em">{{ t.s3a }}</span><span style="font-size:15px;color:#3F3F3F;line-height:1.6">{{ t.s3b }}</span></div>
+  </div>
+</section>
+
+<section id="avis" style="padding:88px 0;overflow:hidden">
+  <div style="text-align:center;margin-bottom:44px;padding:0 32px">
+    <div style="font-size:12px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:#D7141A">{{ t.revKicker }}</div>
+    <h2 style="margin:12px 0 0;font-size:clamp(30px,3.2vw,44px);font-weight:800;text-transform:uppercase;line-height:1.15">{{ t.revTitle }}</h2>
+  </div>
+  <div dir="ltr" style="overflow:hidden">
+    <div style="display:flex;gap:20px;width:max-content;animation:rwSlide 110s linear infinite;padding-right:20px">
+      <div style="flex:none;width:clamp(240px,26vw,340px);aspect-ratio:4/5;background:#F2F1EE"><image-slot id="rw-avis-1" shape="rect" placeholder="Photo client 1"></image-slot></div>
+      <div style="flex:none;width:clamp(240px,26vw,340px);aspect-ratio:4/5;background:#F2F1EE;overflow:hidden"><img src="./life-homme-blanc.jpg" alt="Client R&W" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div style="flex:none;width:clamp(240px,26vw,340px);aspect-ratio:4/5;background:#F2F1EE"><image-slot id="rw-avis-2" shape="rect" placeholder="Photo client 2"></image-slot></div>
+      <div style="flex:none;width:clamp(240px,26vw,340px);aspect-ratio:4/5;background:#F2F1EE;overflow:hidden"><img src="./life-femme-canape.jpg" alt="Cliente R&W" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div style="flex:none;width:clamp(240px,26vw,340px);aspect-ratio:4/5;background:#F2F1EE"><image-slot id="rw-avis-3" shape="rect" placeholder="Photo client 3"></image-slot></div>
+      <div style="flex:none;width:clamp(240px,26vw,340px);aspect-ratio:4/5;background:#F2F1EE;overflow:hidden"><img src="./life-homme-mains.jpg" alt="Client R&W" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div style="flex:none;width:clamp(240px,26vw,340px);aspect-ratio:4/5;background:#F2F1EE"><image-slot id="rw-avis-4" shape="rect" placeholder="Photo client 4"></image-slot></div>
+      <div style="flex:none;width:clamp(240px,26vw,340px);aspect-ratio:4/5;background:#F2F1EE;overflow:hidden"><img src="./life-homme-noir.jpg" alt="Client R&W" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div style="flex:none;width:clamp(240px,26vw,340px);aspect-ratio:4/5;background:#F2F1EE"><image-slot id="rw-avis-5" shape="rect" placeholder="Photo client 5"></image-slot></div>
+      <div style="flex:none;width:clamp(240px,26vw,340px);aspect-ratio:4/5;background:#F2F1EE;overflow:hidden"><img src="./life-femme-rire.jpg" alt="Cliente R&W" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div style="flex:none;width:clamp(240px,26vw,340px);aspect-ratio:4/5;background:#F2F1EE"><image-slot id="rw-avis-6" shape="rect" placeholder="Photo client 6"></image-slot></div>
+      <div style="flex:none;width:clamp(240px,26vw,340px);aspect-ratio:4/5;background:#F2F1EE"><image-slot id="rw-avis-1" data-dup="1" shape="rect" placeholder="Photo client 1"></image-slot></div>
+      <div style="flex:none;width:clamp(240px,26vw,340px);aspect-ratio:4/5;background:#F2F1EE;overflow:hidden"><img src="./life-homme-blanc.jpg" alt="Client R&W" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div style="flex:none;width:clamp(240px,26vw,340px);aspect-ratio:4/5;background:#F2F1EE"><image-slot id="rw-avis-2" data-dup="1" shape="rect" placeholder="Photo client 2"></image-slot></div>
+      <div style="flex:none;width:clamp(240px,26vw,340px);aspect-ratio:4/5;background:#F2F1EE;overflow:hidden"><img src="./life-femme-canape.jpg" alt="Cliente R&W" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div style="flex:none;width:clamp(240px,26vw,340px);aspect-ratio:4/5;background:#F2F1EE"><image-slot id="rw-avis-3" data-dup="1" shape="rect" placeholder="Photo client 3"></image-slot></div>
+      <div style="flex:none;width:clamp(240px,26vw,340px);aspect-ratio:4/5;background:#F2F1EE;overflow:hidden"><img src="./life-homme-mains.jpg" alt="Client R&W" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div style="flex:none;width:clamp(240px,26vw,340px);aspect-ratio:4/5;background:#F2F1EE"><image-slot id="rw-avis-4" data-dup="1" shape="rect" placeholder="Photo client 4"></image-slot></div>
+      <div style="flex:none;width:clamp(240px,26vw,340px);aspect-ratio:4/5;background:#F2F1EE;overflow:hidden"><img src="./life-homme-noir.jpg" alt="Client R&W" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div style="flex:none;width:clamp(240px,26vw,340px);aspect-ratio:4/5;background:#F2F1EE"><image-slot id="rw-avis-5" data-dup="1" shape="rect" placeholder="Photo client 5"></image-slot></div>
+      <div style="flex:none;width:clamp(240px,26vw,340px);aspect-ratio:4/5;background:#F2F1EE;overflow:hidden"><img src="./life-femme-rire.jpg" alt="Cliente R&W" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div style="flex:none;width:clamp(240px,26vw,340px);aspect-ratio:4/5;background:#F2F1EE"><image-slot id="rw-avis-6" data-dup="1" shape="rect" placeholder="Photo client 6"></image-slot></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="background:#F5F4F1;padding:88px 32px">
+  <div style="max-width:880px;margin:0 auto">
+    <h2 style="margin:0 0 32px;font-size:clamp(30px,3.2vw,44px);font-weight:800;text-transform:uppercase;text-align:center">{{ t.faqTitle }}</h2>
+    <div style="display:flex;flex-direction:column;border-top:1px solid #DAD8D2">
+      <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="4">
+        <div style="border-bottom:1px solid #DAD8D2">
+          <button onClick="{{ f.toggle }}" style="width:100%;background:none;border:none;padding:22px 0;display:flex;justify-content:space-between;align-items:center;gap:20px;cursor:pointer;font-size:17px;font-weight:700;text-align:start;color:#0E0E0E">{{ f.q }}<span style="color:#D7141A;font-size:24px;font-weight:300">{{ f.sign }}</span></button>
+          <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}"><p style="margin:0 0 22px;font-size:15px;line-height:1.65;color:#3F3F3F;max-width:68ch">{{ f.a }}</p></sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section style="background:#0E0E0E;color:#fff;padding:120px 32px;text-align:center;position:relative;overflow:hidden">
+  <img src="./rw-boutique.jpg" alt="Boutique R&amp;W Parfums" loading="lazy" style="position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;object-position:50% 38%;display:block">
+  <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(14,14,14,.45) 0%,rgba(14,14,14,.68) 55%,rgba(14,14,14,.82) 100%);pointer-events:none"></div>
+  <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:80px;height:6px;background:#D7141A;z-index:2"></div>
+  <div style="position:relative;z-index:2;pointer-events:none">
+  <h2 style="margin:0 auto;max-width:18ch;font-size:clamp(34px,4.4vw,64px);font-weight:800;text-transform:uppercase;line-height:1.1">{{ t.ctaA }} <span style="font-family:{{ accentFont }};font-style:{{ accentStyle }};font-weight:400;text-transform:none;color:#D7141A">{{ t.ctaB }}</span></h2>
+  <p style="margin:22px auto 34px;font-size:17px;color:#E6E6E6;max-width:46ch">{{ t.ctaP }}</p>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;pointer-events:auto">
+    <button onClick="{{ scrollToOrder }}" style="height:60px;padding:0 36px;background:#D7141A;color:#fff;border:none;font-size:15px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;cursor:pointer" style-hover="background:#fff;color:#0E0E0E">{{ t.ctaBtn }} — 200 {{ t.cur }}</button>
+    <button onClick="{{ scrollToOrder }}" style="height:60px;padding:0 30px;background:transparent;border:1.5px solid #fff;color:#fff;font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:10px" style-hover="background:#fff;color:#0E0E0E">{{ t.orderNow }} <span>{{ t.arrow }}</span></button>
+  </div>
+  </div>
+</section>
+</main>
+
+<footer style="padding:40px 32px 110px;max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:13px;color:#6B6B6B">
+  <span>© 2026 R&amp;W Parfums — {{ t.foot }}</span>
+  <div style="display:flex;gap:24px"><a href="https://www.instagram.com/rwparfums/" target="_blank">Instagram</a></div>
+</footer>
+
+<sc-if value="{{ showSticky }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;left:0;right:0;bottom:0;z-index:45;background:#fff;border-top:1px solid #ECEAE5;box-shadow:0 -10px 30px rgba(0,0,0,.08);padding:12px 24px;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap">
+    <div style="display:flex;flex-direction:column"><span style="font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.08em">{{ t.title }} · {{ packCount }}/4</span><span style="font-size:12px;color:#6B6B6B">{{ t.stickySub }}</span></div>
+    <button onClick="{{ scrollToOrder }}" style="height:50px;padding:0 28px;background:#D7141A;color:#fff;border:none;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;cursor:pointer">{{ stickyCta }}</button>
+  </div>
+</sc-if>
+
+<sc-if value="{{ picking }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closePicker }}" style="position:fixed;inset:0;z-index:60;background:rgba(14,14,14,.5);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:16px;animation:rwFade .35s ease both">
+    <div onClick="{{ stop }}" style="background:#fff;width:100%;max-width:1080px;max-height:92vh;display:flex;flex-direction:column;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.18);animation:rwRise .5s cubic-bezier(.2,.7,.2,1) both">
+      <div style="padding:30px 36px 0;display:flex;flex-direction:column;gap:24px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <span style="font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#9A9893">{{ stepLabel }}</span>
+            <span style="font-family:{{ accentFont }};font-style:{{ accentStyle }};font-size:clamp(26px,3vw,34px);line-height:1.15;color:#0E0E0E">{{ t.pickHead }}</span>
+          </div>
+          <button onClick="{{ closePicker }}" aria-label="close" style="flex:none;width:44px;height:44px;border-radius:50%;border:1px solid #ECEAE5;background:#fff;cursor:pointer;font-size:20px;line-height:1;color:#0E0E0E;transition:border-color .2s" style-hover="border-color:#0E0E0E">×</button>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px">
+          <sc-for list="{{ strip }}" as="g" hint-placeholder-count="4">
+            <button onClick="{{ g.open }}" style="background:none;border:none;border-top:2px solid {{ g.line }};padding:10px 0 0;cursor:pointer;text-align:start;display:flex;flex-direction:column;gap:3px;min-width:0;transition:border-color .3s">
+              <span style="font-size:10px;font-weight:700;letter-spacing:.2em;color:{{ g.numColor }}">{{ g.n }}</span>
+              <span style="font-size:13px;font-weight:600;color:{{ g.nameColor }};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ g.name }}</span>
+            </button>
+          </sc-for>
+        </div>
+        <div style="display:flex;gap:10px;overflow-x:auto;padding-bottom:16px;border-bottom:1px solid #ECEAE5;scrollbar-width:none">
+          <sc-for list="{{ cats }}" as="c" hint-placeholder-count="4">
+            <button onClick="{{ c.select }}" style="flex:none;display:flex;align-items:center;gap:8px;height:42px;padding:0 18px;border-radius:21px;border:1px solid {{ c.border }};background:{{ c.bg }};color:{{ c.color }};cursor:pointer;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;transition:background .2s,color .2s,border-color .2s;white-space:nowrap" style-hover="border-color:#0E0E0E"><span style="width:8px;height:8px;border-radius:50%;background:{{ c.dot }}"></span>{{ c.label }}<span style="font-size:11px;font-weight:600;opacity:.65;letter-spacing:0">{{ c.count }}</span></button>
+          </sc-for>
+        </div>
+      </div>
+      <div style="overflow:auto;padding:28px 36px 36px">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,180px),1fr));gap:32px 20px">
+          <sc-for list="{{ pickList }}" as="p" hint-placeholder-count="8">
+            <div onClick="{{ p.pick }}" role="button" style="cursor:pointer;display:flex;flex-direction:column;gap:14px">
+              <div style="position:relative;aspect-ratio:1/1;background:#fff;overflow:hidden;outline:{{ p.outline }};outline-offset:4px;transition:outline-color .3s">
+                <img src="{{ p.img }}" alt="{{ p.name }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease">
+                <sc-if value="{{ p.inPack }}" hint-placeholder-val="{{ false }}">
+                  <span style="position:absolute;bottom:10px;inset-inline-end:10px;min-width:28px;height:28px;padding:0 8px;border-radius:14px;background:#D7141A;color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;pointer-events:none;font-family:Manrope,sans-serif">✓ {{ p.countLabel }}</span>
+                </sc-if>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <span style="display:flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:{{ p.famColor }}"><span style="width:14px;height:1px;background:{{ p.famColor }}"></span>{{ p.familyT }}</span>
+                <span style="font-family:{{ accentFont }};font-size:20px;line-height:1.2;color:#0E0E0E">{{ p.name }}</span>
+                <span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9A9893">{{ t.inspLabel }}</span><span style="font-size:14px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#0E0E0E">{{ p.brandT }}</span></span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ done }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;z-index:70;background:rgba(14,14,14,.6);display:flex;align-items:center;justify-content:center;padding:20px">
+    <div style="background:#fff;max-width:480px;width:100%;padding:40px 32px;text-align:center;position:relative">
+      <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:56px;height:6px;background:#D7141A"></div>
+      <div style="font-size:12px;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:#D7141A">{{ t.received }}</div>
+      <h3 style="margin:14px 0 10px;font-size:28px;font-weight:800;text-transform:uppercase">{{ thanks }}</h3>
+      <p style="margin:0 0 8px;font-size:15px;line-height:1.6;color:#3F3F3F">{{ summary }}</p>
+      <p style="margin:0 0 26px;font-size:15px;line-height:1.6;color:#3F3F3F">{{ t.callA }} <b dir="ltr">{{ form.phone }}</b> {{ callB }}</p>
+      <a href="{{ waHref }}" target="_blank" style="height:54px;background:#0E0E0E;color:#fff;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:10px"><span style="width:10px;height:10px;border-radius:50%;background:#25D366"></span>{{ t.confirmWa }}</a>
+      <button onClick="{{ reset }}" style="margin-top:12px;background:none;border:none;font-size:13px;color:#6B6B6B;text-decoration:underline;cursor:pointer">{{ t.close }}</button>
+    </div>
+  </div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;emailjsServiceId&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;YOUR_SERVICE_ID&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;EmailJS&quot;},&quot;emailjsTemplateId&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;YOUR_TEMPLATE_ID&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;EmailJS&quot;},&quot;emailjsPublicKey&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;YOUR_PUBLIC_KEY&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;EmailJS&quot;}}">
+const PERFUMES = [
+  { id: 'f-la-vie-est-belle', name: "La Vie Est Belle", fam: 'f', brand: "Lancôme" },
+  { id: 'f-black-opium', name: "Black Opium", fam: 'f', brand: "Yves Saint Laurent" },
+  { id: 'f-explicit-vanilla', name: "Explicit Vanilla", fam: 'f', brand: "" },
+  { id: 'f-si-passione-intense', name: "Si Passione Intense", fam: 'f', brand: "Giorgio Armani" },
+  { id: 'f-fame', name: "Fame", fam: 'f', brand: "Paco Rabanne" },
+  { id: 'f-musc-nude', name: "Musc Nude", fam: 'f', brand: "" },
+  { id: 'f-gucci-bloom', name: "Gucci Bloom", fam: 'f', brand: "Gucci" },
+  { id: 'f-idole', name: "Idôle", fam: 'f', brand: "Lancôme" },
+  { id: 'f-chance', name: "Chance", fam: 'f', brand: "Chanel" },
+  { id: 'f-the-one-femme', name: "The One Femme", fam: 'f', brand: "Dolce & Gabbana" },
+  { id: 'f-libre', name: "Libre", fam: 'f', brand: "Yves Saint Laurent" },
+  { id: 'f-l-interdit', name: "L'Interdit", fam: 'f', brand: "Givenchy" },
+  { id: 'f-mon-guerlain', name: "Mon Guerlain", fam: 'f', brand: "Guerlain" },
+  { id: 'f-fakhar-rose', name: "Fakhar Rose", fam: 'f', brand: "Lattafa" },
+  { id: 'f-hypnotic-poison', name: "Hypnotic Poison", fam: 'f', brand: "Dior" },
+  { id: 'f-miss-dior', name: "Miss Dior", fam: 'f', brand: "Dior" },
+  { id: 'f-la-petite-robe-noire', name: "La Petite Robe Noire", fam: 'f', brand: "Guerlain" },
+  { id: 'f-crystal-noir', name: "Crystal Noir", fam: 'f', brand: "Versace" },
+  { id: 'f-bombshell', name: "Bombshell", fam: 'f', brand: "Victoria's Secret" },
+  { id: 'f-kayali-yum-pistachio-81', name: "Kayali Yum Pistachio 81", fam: 'f', brand: "Kayali" },
+  { id: 'f-scandal-by-night', name: "Scandal By Night", fam: 'f', brand: "Jean Paul Gaultier" },
+  { id: 'f-yara-candy', name: "Yara Candy", fam: 'f', brand: "Lattafa" },
+  { id: 'f-escada-magnetism', name: "Escada Magnetism", fam: 'f', brand: "Escada" },
+  { id: 'f-good-girl-midnight', name: "Good Girl Midnight", fam: 'f', brand: "Carolina Herrera" },
+  { id: 'm-stronger-with-you-intensely', name: "Stronger With You Intensely", fam: 'm', brand: "Giorgio Armani" },
+  { id: 'm-acqua-di-gio', name: "Acqua di Giò", fam: 'm', brand: "Giorgio Armani" },
+  { id: 'm-bleu-de-chanel', name: "Bleu de Chanel", fam: 'm', brand: "Chanel" },
+  { id: 'm-armani-code', name: "Armani Code", fam: 'm', brand: "Giorgio Armani" },
+  { id: 'm-sauvage', name: "Sauvage", fam: 'm', brand: "Dior" },
+  { id: 'm-lacoste-blanc', name: "Lacoste Blanc", fam: 'm', brand: "Lacoste" },
+  { id: 'm-la-nuit-de-l-homme', name: "La Nuit de L'Homme", fam: 'm', brand: "Yves Saint Laurent" },
+  { id: 'm-black-xs', name: "Black XS", fam: 'm', brand: "Paco Rabanne" },
+  { id: 'm-declaration', name: "Déclaration", fam: 'm', brand: "Cartier" },
+  { id: 'm-boss-the-scent', name: "Boss The Scent", fam: 'm', brand: "Hugo Boss" },
+  { id: 'm-scandal-pour-homme', name: "Scandal Pour Homme", fam: 'm', brand: "Jean Paul Gaultier" },
+  { id: 'm-invictus', name: "Invictus", fam: 'm', brand: "Paco Rabanne" },
+  { id: 'm-valentino-uomo', name: "Valentino Uomo", fam: 'm', brand: "Valentino" },
+  { id: 'm-the-one-for-men', name: "The One for Men", fam: 'm', brand: "Dolce & Gabbana" },
+  { id: 'm-aventus', name: "Aventus", fam: 'm', brand: "Creed" },
+  { id: 'm-gentleman', name: "Gentleman", fam: 'm', brand: "Givenchy" },
+  { id: 'm-y', name: "Y", fam: 'm', brand: "Yves Saint Laurent" },
+  { id: 'm-spicebomb-extreme', name: "Spicebomb Extreme", fam: 'm', brand: "Viktor & Rolf" },
+  { id: 'm-myslf', name: "MYSLF", fam: 'm', brand: "Yves Saint Laurent" },
+  { id: 'u-oud-wood', name: "Oud Wood", fam: 'u', brand: "Tom Ford" },
+  { id: 'u-baccarat-rouge-540', name: "Baccarat Rouge 540", fam: 'u', brand: "Maison Francis Kurkdjian" },
+  { id: 'u-oud-satin-mood', name: "Oud Satin Mood", fam: 'u', brand: "Maison Francis Kurkdjian" },
+  { id: 'u-ani', name: "Ani", fam: 'u', brand: "Nishane" },
+  { id: 'u-guidance-46', name: "Guidance 46", fam: 'u', brand: "Amouage" },
+  { id: 'u-alexandria-ii', name: "Alexandria II", fam: 'u', brand: "Xerjoff" },
+  { id: 'u-vanilla-28', name: "Vanilla 28", fam: 'u', brand: "Kayali" },
+  { id: 'u-love-s-burning-cherry-48', name: "Love's Burning Cherry 48", fam: 'u', brand: "Kayali" },
+  { id: 'u-ammerat-al-arab', name: "Ammerat Al Arab", fam: 'u', brand: "Lattafa" },
+  { id: 'u-kirke', name: "Kirke", fam: 'u', brand: "Tiziana Terenzi" }
+];
+const PH = ['Photo du coffret', 'Homme', 'Femme', 'Homme', 'Femme', 'Homme'];
+const GAL = ['', './life-homme-blanc.jpg', './life-femme-rochers.jpg', './life-homme-noir.jpg', './life-femme-rire.jpg', './life-homme-raye.jpg'];
+const WA = '212691102214';
+const FAM_STYLE = { f: { tag: '#B8121A', tint: '#F8F1F0' }, m: { tag: '#0E0E0E', tint: '#F1F1EF' }, u: { tag: '#8A7356', tint: '#F4F0EA' } };
+const LANGS = [
+  { code: 'fr', label: 'Français', short: 'FR' },
+  { code: 'en', label: 'English', short: 'EN' },
+  { code: 'ar', label: 'العربية', short: 'ع' }
+];
+const T = {
+  fr: {
+    bar1: 'Livraison partout au Maroc', bar2: 'Paiement à la livraison', bar3: 'Pack 4 parfums — 200 dhs', bar4: 'Créé avec passion, porté avec fierté',
+    navShop: 'Boutique', navReviews: 'Avis', navAbout: 'À propos',
+    rating: '4,9/5 · clients satisfaits', title: 'Pack Signature', cur: 'dhs',
+    i1: 'Composez votre signature olfactive. Choisissez librement ', i2: '4 parfums', i3: ' parmi notre collection et créez une combinaison qui vous ressemble — ', i4: ' univers, ', i5: ' émotions, un seul coffret.',
+    compose: 'Composez votre pack', choose: 'Choisir', inspLabel: 'Inspiré de', insp: b => `Inspiration ${b}`, sig: 'Création R&W', all: 'Tous', pickHead: 'Choisissez votre parfum', step: n => `Flacon ${n} sur 4`, change: 'Changer', slot: n => `Parfum ${n}`,
+    full: 'Votre pack est complet ✓ Livraison gratuite.', left: n => `Choisissez encore ${n} parfum${n > 1 ? 's' : ''} · Livraison gratuite.`,
+    qty: 'Quantité', quick: 'Commande rapide · paiement à la livraison', name: 'Nom complet', phone: 'Téléphone', city: 'Ville',
+    sizes: '50 ml + 50 ml + 50 ml + 50 ml', orderNow: 'Commander maintenant', arrow: '→', order: 'Commander',
+    tr1a: 'Livraison gratuite', tr1b: 'Partout au Maroc', tr2a: 'Paiement à la livraison', tr2b: 'Vous payez à réception', tr3a: 'Longue tenue', tr3b: 'Jusqu’à 12 h sur peau',
+    s1a: 'Composez', s1b: 'Choisissez 4 parfums de 50 ml dans la collection.', s2a: 'Commandez', s2b: 'Nom, téléphone, ville. Nous vous appelons pour confirmer.', s3a: 'Payez à réception', s3b: 'Livraison en 24–72 h. Vous payez en espèces au livreur.',
+    revKicker: 'Ils l’ont porté', revTitle: 'Ce qu’ils ont ressenti', faqTitle: 'Questions fréquentes',
+    ctaA: 'Créé avec passion,', ctaB: 'porté avec fierté.', ctaP: '4 parfums de 50 ml, livrés chez vous. Payez seulement à la réception.', ctaBtn: 'Composer mon pack', wa: 'WhatsApp',
+    foot: 'Marque indépendante', stickySub: 'Livraison gratuite · paiement à la livraison', ctaChoose: 'Choisir mes parfums →', ctaNext: n => `Encore ${n} à choisir →`, ctaFinish: 'Finaliser ma commande →',
+    pick: n => `Parfum ${n} sur 4`, fam: { m: 'Homme', f: 'Femme', u: 'Unisexe' },
+    received: 'Commande reçue', thanks: n => `Merci ${n} !`, callA: 'Nous vous appelons au', callB: c => `pour confirmer la livraison à ${c}.`,
+    confirmWa: 'Confirmer sur WhatsApp', close: 'Fermer',
+    summary: (q, names, p) => `${q} × Pack Signature : ${names} — ${p} dhs, payable à la livraison.`,
+    eMore: n => `Choisissez encore ${n} parfum${n > 1 ? 's' : ''} pour compléter votre pack.`, eName: 'Indiquez votre nom.', eSend: 'Envoi impossible pour le moment. Réessayez ou commandez sur WhatsApp.', sending: 'Envoi en cours…', ePhone: 'Indiquez un numéro de téléphone valide.', eCity: 'Indiquez votre ville.',
+    msg: (q, names, p, f) => `Bonjour R&W Parfums, je souhaite commander ${q} Pack Signature (${names || 'à composer'}) — ${p} dhs.` + (f.name ? ` Nom : ${f.name}. Ville : ${f.city}.` : ''),
+    faqs: [
+      ['Comment se passe le paiement ?', 'Vous payez en espèces au livreur, à la réception de votre pack. Aucun paiement en ligne n’est requis.'],
+      ['En combien de temps suis-je livré ?', 'Entre 24 et 72 h selon votre ville. La livraison est gratuite partout au Maroc.'],
+      ['Puis-je choisir deux fois le même parfum ?', 'Oui. Composez librement : quatre parfums différents ou plusieurs flacons du même.'],
+      ['Combien de temps tient le parfum ?', 'Nos parfums sont concentrés pour une tenue de 8 à 12 h sur peau, plus longtemps sur les vêtements.']
+    ]
+  },
+  en: {
+    bar1: 'Delivery all over Morocco', bar2: 'Cash on delivery', bar3: '4-perfume pack — 200 dhs', bar4: 'Made with passion, worn with pride',
+    navShop: 'Shop', navReviews: 'Reviews', navAbout: 'About',
+    rating: '4.9/5 · happy customers', title: 'Signature Pack', cur: 'dhs',
+    i1: 'Create your scent signature. Freely choose ', i2: '4 perfumes', i3: ' from our collection and build a combination that feels like you — ', i4: ' worlds, ', i5: ' emotions, one gift box.',
+    compose: 'Build your pack', choose: 'Choose', inspLabel: 'Inspired by', insp: b => `Inspired by ${b}`, sig: 'R&W creation', all: 'All', pickHead: 'Choose your perfume', step: n => `Bottle ${n} of 4`, change: 'Change', slot: n => `Perfume ${n}`,
+    full: 'Your pack is complete ✓ Free delivery.', left: n => `Choose ${n} more perfume${n > 1 ? 's' : ''} · Free delivery.`,
+    qty: 'Quantity', quick: 'Quick order · cash on delivery', name: 'Full name', phone: 'Phone', city: 'City',
+    sizes: '50 ml + 50 ml + 50 ml + 50 ml', orderNow: 'Order now', arrow: '→', order: 'Order',
+    tr1a: 'Free delivery', tr1b: 'All over Morocco', tr2a: 'Cash on delivery', tr2b: 'Pay when it arrives', tr3a: 'Long-lasting', tr3b: 'Up to 12 h on skin',
+    s1a: 'Build', s1b: 'Choose 4 perfumes of 50 ml from the collection.', s2a: 'Order', s2b: 'Name, phone, city. We call you to confirm.', s3a: 'Pay on arrival', s3b: 'Delivered in 24–72 h. Pay the courier in cash.',
+    revKicker: 'They wore it', revTitle: 'How it made them feel', faqTitle: 'Frequently asked questions',
+    ctaA: 'Made with passion,', ctaB: 'worn with pride.', ctaP: '4 perfumes of 50 ml, delivered to your door. Pay only when it arrives.', ctaBtn: 'Build my pack', wa: 'WhatsApp',
+    foot: 'Independent brand', stickySub: 'Free delivery · cash on delivery', ctaChoose: 'Choose my perfumes →', ctaNext: n => `${n} more to choose →`, ctaFinish: 'Complete my order →',
+    pick: n => `Perfume ${n} of 4`, fam: { m: 'Men', f: 'Women', u: 'Unisex' },
+    received: 'Order received', thanks: n => `Thank you ${n}!`, callA: 'We will call you at', callB: c => `to confirm delivery to ${c}.`,
+    confirmWa: 'Confirm on WhatsApp', close: 'Close',
+    summary: (q, names, p) => `${q} × Signature Pack: ${names} — ${p} dhs, cash on delivery.`,
+    eMore: n => `Choose ${n} more perfume${n > 1 ? 's' : ''} to complete your pack.`, eName: 'Please enter your name.', eSend: 'Could not send right now. Please try again or order on WhatsApp.', sending: 'Sending…', ePhone: 'Please enter a valid phone number.', eCity: 'Please enter your city.',
+    msg: (q, names, p, f) => `Hello R&W Parfums, I would like to order ${q} Signature Pack (${names || 'to be chosen'}) — ${p} dhs.` + (f.name ? ` Name: ${f.name}. City: ${f.city}.` : ''),
+    faqs: [
+      ['How does payment work?', 'You pay the courier in cash when your pack arrives. No online payment required.'],
+      ['How long does delivery take?', 'Between 24 and 72 h depending on your city. Delivery is free all over Morocco.'],
+      ['Can I choose the same perfume twice?', 'Yes. Mix freely: four different perfumes or several bottles of the same one.'],
+      ['How long does the scent last?', 'Our perfumes are concentrated to last 8 to 12 h on skin, even longer on clothes.']
+    ]
+  },
+  ar: {
+    bar1: 'التوصيل لجميع أنحاء المغرب', bar2: 'الدفع عند الاستلام', bar3: 'باقة 4 عطور — 200 درهم', bar4: 'صُنع بشغف، يُرتدى بفخر',
+    navShop: 'المتجر', navReviews: 'الآراء', navAbout: 'من نحن',
+    rating: 'تقييم 4.9 من 5 · عملاء راضون', title: 'بصمتك العطرية', sizes: '4 عطور تحكي عنك، بلمسة واحدة', cur: 'درهم',
+    i1: 'اصنع بصمتك العطرية. اختر بحرية ', i2: '4 عطور', i3: ' من مجموعتنا وكوّن تركيبة تشبهك — ', i4: ' عوالم، ', i5: ' أحاسيس، وعلبة واحدة.',
+    compose: 'كوّن باقتك', choose: 'اختيار', inspLabel: 'مستوحى من', insp: b => `مستوحى من ${b}`, sig: 'إبداع R&W', all: 'الكل', pickHead: 'اختر عطرك', step: n => `القارورة ${n} من 4`, change: 'تغيير', slot: n => `عطر ${n}`,
+    full: 'باقتك مكتملة ✓ توصيل مجاني.', left: n => `اختر ${n === 1 ? 'عطراً واحداً' : n + ' عطور'} بعد · توصيل مجاني.`,
+    qty: 'الكمية', quick: 'طلب سريع · الدفع عند الاستلام', name: 'الاسم الكامل', phone: 'رقم الهاتف', city: 'المدينة',
+    orderNow: 'اطلب الآن', arrow: '←', order: 'اطلب',
+    tr1a: 'توصيل مجاني', tr1b: 'لجميع أنحاء المغرب', tr2a: 'الدفع عند الاستلام', tr2b: 'تدفع عند التوصّل', tr3a: 'ثبات طويل', tr3b: 'حتى 12 ساعة على البشرة',
+    s1a: 'اختر', s1b: 'اختر 4 عطور بحجم 50 مل من المجموعة.', s2a: 'اطلب', s2b: 'الاسم، الهاتف، المدينة. نتصل بك للتأكيد.', s3a: 'ادفع عند الاستلام', s3b: 'التوصيل خلال 24–72 ساعة. تدفع نقداً لعامل التوصيل.',
+    revKicker: 'جرّبوه', revTitle: 'إحساس لا يُنسى', faqTitle: 'الأسئلة الشائعة',
+    ctaA: 'صُنع بشغف،', ctaB: 'يُرتدى بفخر.', ctaP: '4 عطور بحجم 50 مل تصلك إلى باب منزلك. ادفع فقط عند الاستلام.', ctaBtn: 'كوّن باقتي', wa: 'واتساب',
+    foot: 'علامة مستقلة', stickySub: 'توصيل مجاني · الدفع عند الاستلام', ctaChoose: 'اختر عطورك ←', ctaNext: n => `بقي ${n} للاختيار ←`, ctaFinish: 'أكمل طلبك ←',
+    pick: n => `العطر ${n} من 4`, fam: { m: 'رجالي', f: 'نسائي', u: 'للجنسين' },
+    received: 'تم استلام طلبك', thanks: n => `شكراً ${n}!`, callA: 'سنتصل بك على الرقم', callB: c => `لتأكيد التوصيل إلى ${c}.`,
+    confirmWa: 'التأكيد عبر واتساب', close: 'إغلاق',
+    summary: (q, names, p) => `${q} × باقة سيغنتشر: ${names} — ${p} درهم، الدفع عند الاستلام.`,
+    eMore: n => `اختر ${n === 1 ? 'عطراً واحداً' : n + ' عطور'} بعد لإكمال باقتك.`, eName: 'المرجو إدخال اسمك.', eSend: 'تعذّر الإرسال حالياً. حاول مرة أخرى أو اطلب عبر واتساب.', sending: 'جارٍ الإرسال…', ePhone: 'المرجو إدخال رقم هاتف صحيح.', eCity: 'المرجو إدخال مدينتك.',
+    msg: (q, names, p, f) => `السلام عليكم R&W Parfums، أريد طلب ${q} باقة سيغنتشر (${names || 'سأختار لاحقاً'}) — ${p} درهم.` + (f.name ? ` الاسم: ${f.name}. المدينة: ${f.city}.` : ''),
+    faqs: [
+      ['كيف يتم الدفع؟', 'تدفع نقداً لعامل التوصيل عند استلام باقتك. لا حاجة للدفع عبر الإنترنت.'],
+      ['كم تستغرق مدة التوصيل؟', 'ما بين 24 و72 ساعة حسب مدينتك. التوصيل مجاني لجميع أنحاء المغرب.'],
+      ['هل يمكنني اختيار نفس العطر مرتين؟', 'نعم. اختر بحرية: أربعة عطور مختلفة أو عدة قارورات من نفس العطر.'],
+      ['كم يدوم العطر؟', 'عطورنا مركّزة لتدوم من 8 إلى 12 ساعة على البشرة، وأكثر على الملابس.']
+    ]
+  }
+};
+
+class Component extends DCLogic {
+  state = { lang: (() => { try { return localStorage.getItem('rw-lang') || 'fr'; } catch (e) { return 'fr'; } })(), langOpen: false, cat: 'all', pack: [null, null, null, null], picking: null, sticky: false, active: 0, qty: 1, form: { name: '', phone: '', city: '' }, errKey: null, errN: 0, tried: false, done: false, faq: 0, sticky: false };
+  componentDidMount() {
+    this.onScroll = () => {
+      const el = document.getElementById('rw-form');
+      let s = window.innerWidth < 760 ? true : window.scrollY > 900;
+      if (s && el) { const r = el.getBoundingClientRect(); if (r.top < window.innerHeight && r.bottom > 0) s = false; }
+      if (s !== this.state.sticky) this.setState({ sticky: s });
+    };
+    this.onScroll();
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    this.onResize = () => { const m = window.innerWidth < 1100, ph = window.innerWidth < 760; if (m !== this.state.mobile || ph !== this.state.phone) this.setState({ mobile: m, phone: ph, menuOpen: ph ? this.state.menuOpen : false }); };
+    this.onResize();
+    window.addEventListener('resize', this.onResize);
+    this.startAuto();
+  }
+  startAuto() {
+    clearInterval(this.auto);
+    this.auto = setInterval(() => this.setState(s => ({ active: (s.active + 1) % PH.length })), 4500);
+  }
+  componentWillUnmount() { clearInterval(this.auto); window.removeEventListener('scroll', this.onScroll); window.removeEventListener('resize', this.onResize); }
+  find(id) { return PERFUMES.find(p => p.id === id); }
+  setLang(code) {
+    try { localStorage.setItem('rw-lang', code); } catch (e) {}
+    document.documentElement.lang = code;
+    this.setState({ lang: code, langOpen: false });
+  }
+  scrollToOrder() {
+    const empty = this.state.pack.findIndex(x => !x);
+    if (empty !== -1) { this.setState({ picking: empty, menuOpen: false }); return; }
+    const el = document.getElementById('rw-form');
+    if (!el) return;
+    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.3, behavior: 'smooth' });
+    const inputs = [...el.querySelectorAll('input')];
+    const target = inputs.find(i => !i.value.trim()) || inputs[0];
+    if (target) setTimeout(() => target.focus({ preventScroll: true }), 650);
+  }
+  setField(k, v) { this.setState(s => ({ form: { ...s.form, [k]: v }, errKey: null })); }
+  submit() {
+    const { pack, form } = this.state;
+    const filled = pack.filter(Boolean).length;
+    let errKey = null;
+    if (filled < 4) errKey = 'eMore';
+    else if (!form.name.trim()) errKey = 'eName';
+    else if (form.phone.replace(/\D/g, '').length < 9) errKey = 'ePhone';
+    else if (!form.city.trim()) errKey = 'eCity';
+    if (errKey) { this.setState({ errKey, errN: 4 - filled, tried: true, picking: filled < 4 ? pack.indexOf(null) : null }); return; }
+    this.sendOrder();
+  }
+  async sendOrder() {
+    if (this.state.sending) return;
+    const { pack, form, qty } = this.state;
+    const items = pack.map((id, i) => { const p = this.find(id); return `${i + 1}. ${p.name}${p.brand ? ' (' + p.brand + ')' : ''} — ${({ f: 'Femme', m: 'Homme', u: 'Unisexe' })[p.fam]}`; });
+    const params = {
+      customer_name: form.name.trim(),
+      customer_phone: form.phone.trim(),
+      customer_city: form.city.trim(),
+      quantity: qty,
+      total: `${200 * qty} dhs`,
+      perfumes: items.join('\n'),
+      language: this.state.lang,
+      order_date: new Date().toLocaleString('fr-MA'),
+      message: `Nouvelle commande — ${qty} × Pack Signature (${200 * qty} dhs)\n\n${items.join('\n')}\n\nNom : ${form.name}\nTéléphone : ${form.phone}\nVille : ${form.city}`
+    };
+    const pick = (v, d) => (v && !String(v).startsWith('YOUR_')) ? v : d;
+    const service = pick(this.props.emailjsServiceId, 'service_47yxzpn');
+    const template = pick(this.props.emailjsTemplateId, 'template_2rskbjm');
+    const key = pick(this.props.emailjsPublicKey, 'bLyCIU6WSRJoBdD_u');
+    this.setState({ sending: true, errKey: null });
+    try {
+      if (!window.emailjs) throw new Error('EmailJS not loaded');
+      await window.emailjs.send(service, template, params, { publicKey: key });
+      this.setState({ sending: false, done: true });
+    } catch (e) {
+      console.warn('EmailJS:', e);
+      this.setState({ sending: false, errKey: 'eSend' });
+    }
+  }
+  renderVals() {
+    const { lang, langOpen, cat, pack, picking, active, qty, form, errKey, errN, tried, done, faq, sticky } = this.state;
+    const t = T[lang] || T.fr;
+    const ar = lang === 'ar';
+    const count = pack.filter(Boolean).length;
+    const names = pack.filter(Boolean).map(id => { const p = this.find(id); return p.brand ? `${p.name} (${p.brand})` : p.name; }).join(' + ');
+    const left = 4 - count;
+    const bad = (v, ok) => (tried && !ok(v)) ? '1.5px solid #D7141A' : '1px solid #DAD8D2';
+    const errorMsg = errKey ? (typeof t[errKey] === 'function' ? t[errKey](errN) : t[errKey]) : '';
+    return {
+      t, lang, dir: ar ? 'rtl' : 'ltr',
+      font: ar ? "Tajawal, Manrope, system-ui, sans-serif" : "Manrope, system-ui, sans-serif",
+      accentFont: ar ? 'Tajawal, sans-serif' : "'Playfair Display', serif",
+      accentStyle: ar ? 'normal' : 'italic',
+      titleWeight: ar ? 700 : 800,
+      langCode: (LANGS.find(l => l.code === lang) || LANGS[0]).short,
+      langOpen,
+      toggleLang: () => this.setState({ langOpen: !langOpen, menuOpen: false }),
+      phone: !!this.state.phone, notPhone: !this.state.phone, menuOpen: !!this.state.menuOpen && !!this.state.phone,
+      toggleMenu: () => this.setState({ menuOpen: !this.state.menuOpen, langOpen: false }),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      bar1: this.state.menuOpen ? 'translateY(8px) rotate(45deg)' : 'none',
+      bar2: this.state.menuOpen ? 0 : 1,
+      bar3: this.state.menuOpen ? 'translateY(-8px) rotate(-45deg)' : 'none',
+      closeLang: () => this.setState({ langOpen: false }),
+      langs: LANGS.map(l => ({ label: l.label, mark: l.code === lang ? '●' : '', bg: l.code === lang ? '#F5F4F1' : '#fff', font: l.code === 'ar' ? 'Tajawal, sans-serif' : 'Manrope, sans-serif', pick: () => this.setLang(l.code) })),
+      submitLabel: this.state.sending ? t.sending : `${t.orderNow} — ${200 * qty} ${t.cur} ${t.arrow}`,
+      galleryPos: this.state.mobile ? 'static' : 'sticky',
+      orderPad: this.state.phone ? '24px 16px 64px' : '40px 32px 72px',
+      mainAspect: this.state.phone ? '2/3' : '4/5', galGap: this.state.phone ? '10px' : '16px',
+      thumbW: this.state.phone ? '58px' : '76px', thumbH: this.state.phone ? '72px' : '92px',
+      thumbs: PH.map((ph, i) => ({
+        n: String(i + 1).padStart(2, '0'), ph, slotId: i === 0 ? 'rw-gallery-0' : 'rw-life-' + i, src: GAL[i],
+        border: i === active ? '1.5px solid #0E0E0E' : '1px solid #ECEAE5',
+        thumbOpacity: i === active ? 1 : 0.55,
+        opacity: i === active ? 1 : 0, z: i === active ? 1 : 0, scale: i === active ? 1.04 : 1,
+        select: () => { this.setState({ active: i }); this.startAuto(); }
+      })),
+      slots: pack.map((id, i) => {
+        const p = id && this.find(id);
+        return {
+          plus: i > 0, filled: !!p, empty: !p, labelText: t.slot(i + 1),
+          name: p ? p.name : '', img: p ? `./p-${p.id}.jpg` : '', family: p ? t.fam[p.fam] : '', brand: p ? (p.brand || 'R&W') : '',
+          bg: p ? '#fff' : 'transparent',
+          border: p ? '2px solid #D7141A' : '1.5px dashed #6B6B6B',
+          open: () => this.setState({ picking: i }),
+          remove: e => { e.stopPropagation(); this.setState(st => { const n = [...st.pack]; n[i] = null; return { pack: n, errKey: null }; }); }
+        };
+      }),
+      packCount: count,
+      packHint: left === 0 ? t.full : t.left(left),
+      price: 200 * qty, oldPrice: 349 * qty, qty,
+      inc: () => this.setState({ qty: Math.min(10, qty + 1) }),
+      dec: () => this.setState({ qty: Math.max(1, qty - 1) }),
+      form,
+      setName: e => this.setField('name', e.target.value),
+      setPhone: e => this.setField('phone', e.target.value),
+      setCity: e => this.setField('city', e.target.value),
+      nameBorder: bad(form.name, v => v.trim()),
+      phoneBorder: bad(form.phone, v => v.replace(/\D/g, '').length >= 9),
+      cityBorder: bad(form.city, v => v.trim()),
+      hasError: !!errKey, errorMsg,
+      submit: () => this.submit(),
+      scrollToOrder: () => this.scrollToOrder(),
+      waHref: `https://wa.me/${WA}?text=${encodeURIComponent(t.msg(qty, names, 200 * qty, form))}`,
+      perfumes: PERFUMES.map(p => ({
+        name: p.name, familyT: t.fam[p.fam], notesT: (p.brand ? t.insp(p.brand) : t.sig),
+        pick: () => {
+          const next = [...pack]; next[picking] = p.id;
+          const nextEmpty = next.indexOf(null);
+          this.setState({ pack: next, picking: nextEmpty === -1 ? null : nextEmpty, errKey: null }, () => { if (nextEmpty === -1) setTimeout(() => this.scrollToOrder(), 350); });
+        }
+      })),
+      stepLabel: t.step((picking ?? 0) + 1),
+      strip: pack.map((id, i) => ({
+        n: String(i + 1).padStart(2, '0'),
+        name: id ? this.find(id).name : '—',
+        line: i === picking ? '#0E0E0E' : (id ? '#D7141A' : '#ECEAE5'),
+        numColor: i === picking ? '#0E0E0E' : '#9A9893',
+        nameColor: id ? '#0E0E0E' : '#B5B3AE',
+        open: () => this.setState({ picking: i })
+      })),
+      cats: ['all', 'f', 'm', 'u'].map(k => ({
+        label: k === 'all' ? t.all : t.fam[k], count: k === 'all' ? PERFUMES.length : PERFUMES.filter(p => p.fam === k).length,
+        bg: cat === k ? '#0E0E0E' : '#fff',
+        border: cat === k ? '#0E0E0E' : '#DAD8D2',
+        color: cat === k ? '#fff' : '#0E0E0E',
+        dot: ({ all: '#D7141A', f: '#D7141A', m: cat === k ? '#fff' : '#0E0E0E', u: '#9A9893' })[k],
+        select: () => this.setState({ cat: k })
+      })),
+      pickList: PERFUMES.filter(p => cat === 'all' || p.fam === cat).map(p => {
+        const c = pack.filter(x => x === p.id).length;
+        return {
+          id: p.id, img: `./p-${p.id}.jpg`, name: p.name, brandT: p.brand || 'R&W', familyT: t.fam[p.fam], notesT: (p.brand ? t.insp(p.brand) : t.sig),
+          tint: FAM_STYLE[p.fam].tint, famColor: FAM_STYLE[p.fam].tag,
+          outline: pack[picking] === p.id ? '1px solid #0E0E0E' : '1px solid transparent',
+          inPack: c > 0, countLabel: c > 1 ? '×' + c : '',
+          pick: () => {
+            const next = [...pack]; next[picking] = p.id;
+            const nextEmpty = next.indexOf(null);
+            this.setState({ pack: next, picking: nextEmpty === -1 ? null : nextEmpty, errKey: null }, () => { if (nextEmpty === -1) setTimeout(() => this.scrollToOrder(), 350); });
+          }
+        };
+      }),
+      picking: picking !== null, pickTitle: t.pick((picking ?? 0) + 1),
+      closePicker: () => this.setState({ picking: null }),
+      stop: e => e.stopPropagation(),
+      faqs: t.faqs.map(([q, a], i) => ({ q, a, open: faq === i, sign: faq === i ? '−' : '+', toggle: () => this.setState({ faq: faq === i ? -1 : i }) })),
+      stickyCta: (() => { const c = pack.filter(Boolean).length; return c === 0 ? t.ctaChoose : c < 4 ? t.ctaNext(4 - c) : t.ctaFinish; })(),
+      showSticky: sticky && !done && picking === null,
+      done,
+      thanks: t.thanks(form.name),
+      callB: t.callB(form.city),
+      summary: t.summary(qty, names, 200 * qty),
+      reset: () => this.setState({ done: false, pack: [null, null, null, null], form: { name: '', phone: '', city: '' }, tried: false, qty: 1 })
+    };
+  }
+}
+</script>
+</body>
+</html>
