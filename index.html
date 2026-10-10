@@ -499,7 +499,7 @@ class Component extends DCLogic {
   componentDidMount() {
     this.onScroll = () => {
       const el = document.getElementById('rw-form');
-      let s = window.innerWidth < 760 ? true : window.scrollY > 900;
+      let s = window.innerWidth < 760 ? window.scrollY > 120 : window.scrollY > 900;
       if (s && el) { const r = el.getBoundingClientRect(); if (r.top < window.innerHeight && r.bottom > 0) s = false; }
       if (s !== this.state.sticky) this.setState({ sticky: s });
     };
