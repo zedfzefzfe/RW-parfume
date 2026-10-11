@@ -8,6 +8,22 @@
 <body>
 <x-dc>
 <helmet>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1116053407452193');
+fbq('track', 'PageView');
+window.rwTrack = function(name, params, opts){ try{ if(window.fbq) fbq('track', name, params||{}, opts||{}); }catch(e){} };
+window.rwTrack('ViewContent', {content_name:'Pack Signature', content_type:'product', content_ids:['pack-signature'], value:200, currency:'MAD'});
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1116053407452193&amp;ev=PageView&amp;noscript=1"></noscript>
+<!-- End Meta Pixel Code -->
 <template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0E0E0E"></rect><text x="50" y="60" text-anchor="middle" font-family="Georgia,serif" font-size="26" fill="#fff">R<tspan fill="#D7141A" font-style="italic">&amp;</tspan>W</text></svg></template>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
@@ -175,9 +191,9 @@ input,button{font-family:inherit}
       <div style="flex:1;min-width:240px;display:flex;flex-direction:column;gap:8px;text-align:start">
         <span style="font-size:13px;color:#6B6B6B">{{ t.quick }}</span>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px">
-          <input value="{{ form.name }}" onChange="{{ setName }}" placeholder="{{ t.name }}" style="height:56px;border:{{ nameBorder }};padding:0 14px;font-size:15px;outline:none">
-          <input value="{{ form.phone }}" onChange="{{ setPhone }}" placeholder="{{ t.phone }}" inputmode="tel" style="height:56px;border:{{ phoneBorder }};padding:0 14px;font-size:15px;outline:none">
-          <input value="{{ form.city }}" onChange="{{ setCity }}" placeholder="{{ t.city }}" style="height:56px;border:{{ cityBorder }};padding:0 14px;font-size:15px;outline:none">
+          <input value="{{ form.name }}" onChange="{{ setName }}" onFocus="{{ onFieldFocus }}" placeholder="{{ t.name }}" style="height:56px;border:{{ nameBorder }};padding:0 14px;font-size:15px;outline:none">
+          <input value="{{ form.phone }}" onChange="{{ setPhone }}" onFocus="{{ onFieldFocus }}" placeholder="{{ t.phone }}" inputmode="tel" style="height:56px;border:{{ phoneBorder }};padding:0 14px;font-size:15px;outline:none">
+          <input value="{{ form.city }}" onChange="{{ setCity }}" onFocus="{{ onFieldFocus }}" placeholder="{{ t.city }}" style="height:56px;border:{{ cityBorder }};padding:0 14px;font-size:15px;outline:none">
         </div>
       </div>
     </div>
@@ -493,6 +509,32 @@ const T = {
 
 class Component extends DCLogic {
   state = { lang: (() => { try { return localStorage.getItem('rw-lang') || 'fr'; } catch (e) { return 'fr'; } })(), langOpen: false, cat: 'all', pack: [null, null, null, null], picking: null, sticky: false, active: 0, qty: 1, form: { name: '', phone: '', city: '' }, errKey: null, errN: 0, tried: false, done: false, faq: 0, sticky: false };
+  track(name, params, opts) { try { if (window.fbq) window.fbq('track', name, params || {}, opts || {}); } catch (e) {} }
+  trackAddToCart(pack) {
+    if (this._atcSent) return; this._atcSent = true;
+    const names = pack.map(id => this.find(id).name);
+    this.track('AddToCart', { content_name: 'Pack Signature', content_ids: ['pack-signature'], contents: names, value: 200, currency: 'MAD' });
+  }
+  trackInitiateCheckout() {
+    if (this._icSent) return; this._icSent = true;
+    const q = this.state.qty || 1;
+    this.track('InitiateCheckout', { content_ids: ['pack-signature'], value: 200 * q, currency: 'MAD', num_items: q });
+  }
+  trackPurchase({ eventID, names, qty, form }) {
+    this._sentOrders = this._sentOrders || new Set();
+    if (this._sentOrders.has(eventID)) return; this._sentOrders.add(eventID);
+    try {
+      let ph = String(form.phone || '').replace(/\D/g, '');
+      if (ph.startsWith('00')) ph = ph.slice(2);
+      if (/^0[67]\d{8}$/.test(ph)) ph = '212' + ph.slice(1);
+      const parts = String(form.name || '').trim().toLowerCase().split(/\s+/);
+      const fn = parts[0] || '', ln = parts.slice(1).join(' ');
+      const ct = String(form.city || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]/g, '');
+      if (window.fbq) window.fbq('init', '1116053407452193', { ph, fn, ln, ct, country: 'ma' });
+    } catch (e) {}
+    this.track('Purchase', { content_name: 'Pack Signature', content_ids: ['pack-signature'], contents: names, value: 200 * qty, currency: 'MAD', num_items: qty }, { eventID });
+    try { const k = 'rw-orders'; const list = JSON.parse(localStorage.getItem(k) || '[]'); list.push({ eventID, date: new Date().toISOString(), name: form.name, phone: form.phone, city: form.city, qty, value: 200 * qty, perfumes: names }); localStorage.setItem(k, JSON.stringify(list.slice(-20))); } catch (e) {}
+  }
   componentDidMount() {
     this.onScroll = () => {
       const el = document.getElementById('rw-form');
@@ -544,7 +586,10 @@ class Component extends DCLogic {
     if (this.state.sending) return;
     const { pack, form, qty } = this.state;
     const items = pack.map((id, i) => { const p = this.find(id); return `${i + 1}. ${p.name}${p.brand ? ' (' + p.brand + ')' : ''} — ${({ f: 'Femme', m: 'Homme', u: 'Unisexe' })[p.fam]}`; });
+    const eventID = 'order_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+    const names = pack.map(id => this.find(id).name);
     const params = {
+      event_id: eventID,
       customer_name: form.name.trim(),
       customer_phone: form.phone.trim(),
       customer_city: form.city.trim(),
@@ -563,6 +608,7 @@ class Component extends DCLogic {
     try {
       if (!window.emailjs) throw new Error('EmailJS not loaded');
       await window.emailjs.send(service, template, params, { publicKey: key });
+      this.trackPurchase({ eventID, names, qty, form });
       this.setState({ sending: false, done: true });
     } catch (e) {
       console.warn('EmailJS:', e);
@@ -624,9 +670,10 @@ class Component extends DCLogic {
       inc: () => this.setState({ qty: Math.min(10, qty + 1) }),
       dec: () => this.setState({ qty: Math.max(1, qty - 1) }),
       form,
-      setName: e => this.setField('name', e.target.value),
-      setPhone: e => this.setField('phone', e.target.value),
-      setCity: e => this.setField('city', e.target.value),
+      onFieldFocus: () => this.trackInitiateCheckout(),
+      setName: e => { this.trackInitiateCheckout(); this.setField('name', e.target.value); },
+      setPhone: e => { this.trackInitiateCheckout(); this.setField('phone', e.target.value); },
+      setCity: e => { this.trackInitiateCheckout(); this.setField('city', e.target.value); },
       nameBorder: bad(form.name, v => v.trim()),
       phoneBorder: bad(form.phone, v => v.replace(/\D/g, '').length >= 9),
       cityBorder: bad(form.city, v => v.trim()),
@@ -639,7 +686,7 @@ class Component extends DCLogic {
         pick: () => {
           const next = [...pack]; next[picking] = p.id;
           const nextEmpty = next.indexOf(null);
-          this.setState({ pack: next, picking: nextEmpty === -1 ? null : nextEmpty, errKey: null }, () => { if (nextEmpty === -1) setTimeout(() => this.scrollToOrder(), 350); });
+          this.setState({ pack: next, picking: nextEmpty === -1 ? null : nextEmpty, errKey: null }, () => { if (nextEmpty === -1) { this.trackAddToCart(next); setTimeout(() => this.scrollToOrder(), 350); } });
         }
       })),
       stepLabel: t.step((picking ?? 0) + 1),
@@ -669,7 +716,7 @@ class Component extends DCLogic {
           pick: () => {
             const next = [...pack]; next[picking] = p.id;
             const nextEmpty = next.indexOf(null);
-            this.setState({ pack: next, picking: nextEmpty === -1 ? null : nextEmpty, errKey: null }, () => { if (nextEmpty === -1) setTimeout(() => this.scrollToOrder(), 350); });
+            this.setState({ pack: next, picking: nextEmpty === -1 ? null : nextEmpty, errKey: null }, () => { if (nextEmpty === -1) { this.trackAddToCart(next); setTimeout(() => this.scrollToOrder(), 350); } });
           }
         };
       }),
