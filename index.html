@@ -17,10 +17,12 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
+if(!window.__rwPixel){window.__rwPixel=1;
 fbq('init', '1116053407452193');
 fbq('track', 'PageView');
 window.rwTrack = function(name, params, opts){ try{ if(window.fbq) fbq('track', name, params||{}, opts||{}); }catch(e){} };
 window.rwTrack('ViewContent', {content_name:'Pack Signature', content_type:'product', content_ids:['pack-signature'], value:200, currency:'MAD'});
+}
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1116053407452193&amp;ev=PageView&amp;noscript=1"></noscript>
 <!-- End Meta Pixel Code -->
