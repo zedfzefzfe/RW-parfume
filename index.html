@@ -322,20 +322,20 @@ input,button{font-family:inherit}
           </sc-for>
         </div>
       </div>
-      <div style="overflow:auto;padding:28px 36px 36px">
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,180px),1fr));gap:32px 20px">
+      <div style="overflow:auto;padding:{{ pickPad }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,{{ pickMin }}),1fr));gap:{{ pickGap }}">
           <sc-for list="{{ pickList }}" as="p" hint-placeholder-count="8">
-            <div onClick="{{ p.pick }}" role="button" style="cursor:pointer;display:flex;flex-direction:column;gap:14px">
+            <div onClick="{{ p.pick }}" role="button" style="cursor:pointer;display:flex;flex-direction:column;gap:10px">
               <div style="position:relative;aspect-ratio:1/1;background:#fff;overflow:hidden;outline:{{ p.outline }};outline-offset:4px;transition:outline-color .3s">
-                <img src="{{ p.img }}" alt="{{ p.name }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease">
+                <img src="{{ p.img }}" alt="{{ p.name }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
                 <sc-if value="{{ p.inPack }}" hint-placeholder-val="{{ false }}">
                   <span style="position:absolute;bottom:10px;inset-inline-end:10px;min-width:28px;height:28px;padding:0 8px;border-radius:14px;background:#D7141A;color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;pointer-events:none;font-family:Manrope,sans-serif">✓ {{ p.countLabel }}</span>
                 </sc-if>
               </div>
-              <div style="display:flex;flex-direction:column;gap:6px">
-                <span style="display:flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:{{ p.famColor }}"><span style="width:14px;height:1px;background:{{ p.famColor }}"></span>{{ p.familyT }}</span>
-                <span style="font-family:{{ accentFont }};font-size:20px;line-height:1.2;color:#0E0E0E">{{ p.name }}</span>
-                <span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#9A9893">{{ t.inspLabel }}</span><span style="font-size:14px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#0E0E0E">{{ p.brandT }}</span></span>
+              <div style="display:flex;flex-direction:column;gap:4px">
+                <span style="display:flex;align-items:center;gap:6px;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:{{ p.famColor }}"><span style="width:14px;height:1px;background:{{ p.famColor }}"></span>{{ p.familyT }}</span>
+                <span style="font-family:{{ accentFont }};font-size:{{ pickName }};line-height:1.2;color:#0E0E0E">{{ p.name }}</span>
+                <span style="display:flex;flex-direction:column;gap:1px"><span style="font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#9A9893">{{ t.inspLabel }}</span><span style="font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#0E0E0E">{{ p.brandT }}</span></span>
               </div>
             </div>
           </sc-for>
@@ -645,6 +645,8 @@ class Component extends DCLogic {
       langs: LANGS.map(l => ({ label: l.label, mark: l.code === lang ? '●' : '', bg: l.code === lang ? '#F5F4F1' : '#fff', font: l.code === 'ar' ? 'Tajawal, sans-serif' : 'Manrope, sans-serif', pick: () => this.setLang(l.code) })),
       submitLabel: this.state.sending ? t.sending : `${t.orderNow} — ${200 * qty} ${t.cur} ${t.arrow}`,
       galleryPos: this.state.mobile ? 'static' : 'sticky',
+      pickPad: this.state.phone ? '18px 16px 28px' : '28px 36px 36px', pickMin: this.state.phone ? '130px' : '170px',
+      pickGap: this.state.phone ? '22px 12px' : '28px 18px', pickName: this.state.phone ? '16px' : '18px',
       orderPad: this.state.phone ? '24px 16px 64px' : '40px 32px 72px',
       mainAspect: this.state.phone ? '1/1' : '4/5', galGap: this.state.phone ? '12px' : '16px',
       thumbW: this.state.phone ? '62px' : '76px', thumbH: this.state.phone ? '62px' : '92px',
