@@ -318,7 +318,7 @@ input,button{font-family:inherit}
             <button onClick="{{ g.open }}" style="position:relative;width:100%;aspect-ratio:1/1;padding:0;cursor:pointer;background:#F5F4F1;border:{{ g.border }};overflow:hidden;display:flex;align-items:center;justify-content:center">
               <sc-if value="{{ g.has }}" hint-placeholder-val="{{ false }}"><img src="{{ g.img }}" alt="{{ g.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></sc-if>
               <sc-if value="{{ g.empty }}" hint-placeholder-val="{{ true }}"><span style="font-size:12px;font-weight:700;color:{{ g.numColor }}">{{ g.n }}</span></sc-if>
-              <sc-if value="{{ g.has }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:3px;inset-inline-start:3px;min-width:16px;height:16px;padding:0 4px;background:#D7141A;color:#fff;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;font-family:Manrope,sans-serif">{{ g.num }}</span></sc-if>
+              <sc-if value="{{ g.has }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:3px;inset-inline-start:3px;min-width:16px;height:16px;padding:0 4px;background:#D7141A;color:#fff;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;font-family:Manrope,sans-serif">{{ g.num }}</span><span role="button" aria-label="Retirer" onClick="{{ g.remove }}" style="position:absolute;top:3px;inset-inline-end:3px;width:22px;height:22px;border-radius:50%;background:#0E0E0E;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.25)"><svg width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M1 1l8 8M9 1L1 9"></path></svg></span></sc-if>
             </button>
             <span style="font-size:10px;font-weight:700;line-height:1.2;text-transform:uppercase;text-align:center;color:{{ g.nameColor }};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ g.label }}</span>
             </div>
@@ -717,7 +717,8 @@ class Component extends DCLogic {
         line: i === picking ? '#0E0E0E' : (id ? '#D7141A' : '#ECEAE5'),
         numColor: i === picking ? '#0E0E0E' : '#9A9893',
         nameColor: id ? '#0E0E0E' : '#B5B3AE',
-        open: () => this.setState({ picking: i })
+        open: () => this.setState({ picking: i }),
+        remove: e => { e.stopPropagation(); this.setState(st => { const n = [...st.pack]; n[i] = null; return { pack: n, picking: i, errKey: null }; }); }
       })),
       cats: ['f', 'm', 'u'].map(k => ({
         label: t.fam[k], count: PERFUMES.filter(p => p.fam === k).length,
