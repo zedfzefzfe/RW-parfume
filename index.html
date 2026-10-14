@@ -131,6 +131,9 @@ input,button{font-family:inherit}
     </div></div>
     </sc-if>
     <div style="flex:1;min-width:0;position:relative;aspect-ratio:{{ mainAspect }};background:#F2F1EE">
+      <div style="position:absolute;left:0;right:0;bottom:0;z-index:6;padding:56px 16px 16px;background:linear-gradient(180deg,rgba(14,14,14,0) 0%,rgba(14,14,14,.55) 100%);display:flex;justify-content:center;pointer-events:none">
+        <button onClick="{{ openPickerTop }}" style="pointer-events:auto;height:52px;padding:0 26px;border:none;background:#fff;color:#0E0E0E;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;box-shadow:0 10px 26px rgba(0,0,0,.25);touch-action:manipulation;-webkit-tap-highlight-color:rgba(0,0,0,.15);font-family:Manrope,sans-serif"><span style="pointer-events:none">{{ heroCta }}</span><span style="pointer-events:none;color:#D7141A;font-size:16px">{{ t.arrow }}</span></button>
+      </div>
       <sc-for list="{{ thumbs }}" as="t" hint-placeholder-count="1">
         <div style="position:absolute;inset:0;opacity:{{ t.opacity }};z-index:{{ t.z }};transition:opacity 1.2s ease">
           <img src="{{ t.src }}" alt="R&amp;W Parfums" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
