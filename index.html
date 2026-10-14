@@ -120,6 +120,7 @@ input,button{font-family:inherit}
 <section id="order" style="max-width:1400px;margin:0 auto;padding:{{ orderPad }};display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr));gap:56px;align-items:start">
 
   <div style="display:flex;flex-direction:{{ galDir }};gap:{{ galGap }};position:{{ galleryPos }};top:120px;margin:{{ galMargin }};min-width:0">
+    <sc-if value="{{ notPhone }}" hint-placeholder-val="{{ true }}">
     <div style="flex:none;width:{{ thumbColW }};position:{{ thumbColPos }};align-self:stretch;padding:{{ thumbColPad }}"><div style="position:{{ thumbInnerPos }};inset:0;display:flex;flex-direction:{{ thumbDir }};gap:{{ thumbGap }};overflow-x:auto;overflow-y:auto;scrollbar-width:none">
       <sc-for list="{{ thumbs }}" as="t" hint-placeholder-count="4">
         <button onClick="{{ t.select }}" style="flex:none;width:{{ thumbW }};height:{{ thumbH }};padding:0;border:{{ t.border }};background:#F5F4F1;cursor:pointer;display:block;position:relative;overflow:hidden;opacity:{{ t.thumbOpacity }};transition:opacity .4s ease, border-color .4s ease">
@@ -129,6 +130,7 @@ input,button{font-family:inherit}
         </button>
       </sc-for>
     </div></div>
+    </sc-if>
     <div style="flex:1;min-width:0;position:relative;aspect-ratio:{{ mainAspect }};background:#F2F1EE">
       <sc-for list="{{ thumbs }}" as="t" hint-placeholder-count="1">
         <div style="position:absolute;inset:0;opacity:{{ t.opacity }};z-index:{{ t.z }};transition:opacity 1.2s ease">
@@ -310,10 +312,14 @@ input,button{font-family:inherit}
         </div>
         <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px">
           <sc-for list="{{ strip }}" as="g" hint-placeholder-count="4">
-            <button onClick="{{ g.open }}" style="position:relative;aspect-ratio:1/1;padding:0;cursor:pointer;background:#F5F4F1;border:{{ g.border }};overflow:hidden;display:flex;align-items:center;justify-content:center">
+            <div style="display:flex;flex-direction:column;gap:4px;min-width:0">
+            <button onClick="{{ g.open }}" style="position:relative;width:100%;aspect-ratio:1/1;padding:0;cursor:pointer;background:#F5F4F1;border:{{ g.border }};overflow:hidden;display:flex;align-items:center;justify-content:center">
               <sc-if value="{{ g.has }}" hint-placeholder-val="{{ false }}"><img src="{{ g.img }}" alt="{{ g.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></sc-if>
               <sc-if value="{{ g.empty }}" hint-placeholder-val="{{ true }}"><span style="font-size:12px;font-weight:700;color:{{ g.numColor }}">{{ g.n }}</span></sc-if>
+              <sc-if value="{{ g.has }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:3px;inset-inline-start:3px;min-width:16px;height:16px;padding:0 4px;background:#D7141A;color:#fff;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;font-family:Manrope,sans-serif">{{ g.num }}</span></sc-if>
             </button>
+            <span style="font-size:10px;font-weight:700;line-height:1.2;text-transform:uppercase;text-align:center;color:{{ g.nameColor }};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ g.label }}</span>
+            </div>
           </sc-for>
         </div>
         <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;background:#F2F1EE;padding:4px;border-radius:24px">
@@ -704,7 +710,7 @@ class Component extends DCLogic {
       strip: pack.map((id, i) => ({
         n: String(i + 1).padStart(2, '0'),
         name: id ? this.find(id).name : '—',
-        has: !!id, empty: !id, img: id ? `./p-${id}.jpg` : '',
+        has: !!id, empty: !id, num: String(i + 1), label: id ? this.find(id).name : t.slot(i + 1), img: id ? `./p-${id}.jpg` : '',
         border: i === picking ? '2px solid #0E0E0E' : (id ? '2px solid #D7141A' : '1.5px dashed #C9C7C1'),
         line: i === picking ? '#0E0E0E' : (id ? '#D7141A' : '#ECEAE5'),
         numColor: i === picking ? '#0E0E0E' : '#9A9893',
