@@ -131,7 +131,7 @@ input,button{font-family:inherit}
     </div></div>
     <div style="flex:1;min-width:0;position:relative;aspect-ratio:{{ mainAspect }};background:#F2F1EE">
       <sc-for list="{{ thumbs }}" as="t" hint-placeholder-count="1">
-        <div style="position:absolute;inset:0;opacity:{{ t.opacity }};z-index:{{ t.z }};transform:scale({{ t.scale }});transition:opacity 1.2s ease, transform 6s ease-out">
+        <div style="position:absolute;inset:0;opacity:{{ t.opacity }};z-index:{{ t.z }};transition:opacity 1.2s ease">
           <image-slot id="{{ t.slotId }}" src="{{ t.src }}" shape="rect" placeholder="{{ t.ph }}"></image-slot>
         </div>
       </sc-for>
