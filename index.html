@@ -151,7 +151,9 @@ input,button{font-family:inherit}
       <span style="font-size:34px;font-weight:800">{{ price }} {{ t.cur }}</span>
       <span style="font-size:18px;color:#9A9893;text-decoration:line-through">{{ oldPrice }} {{ t.cur }}</span><span style="font-size:12px;font-weight:800;letter-spacing:.08em;color:#fff;background:#D7141A;padding:5px 9px;align-self:center">-43%</span>
     </div>
-    <div style="width:44px;height:3px;background:#D7141A;margin:18px 0 24px"></div>
+    <button onClick="{{ openPickerTop }}" style="margin-top:20px;width:100%;max-width:420px;height:58px;border:none;background:#D7141A;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:12px;font-size:14px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;box-shadow:0 10px 24px rgba(215,20,26,.28);transition:background .2s,transform .2s" style-hover="background:#B81015;transform:translateY(-1px)"><span>{{ heroCta }}</span><span style="display:flex;gap:4px"><span style="width:7px;height:7px;border-radius:50%;background:{{ dot1 }}"></span><span style="width:7px;height:7px;border-radius:50%;background:{{ dot2 }}"></span><span style="width:7px;height:7px;border-radius:50%;background:{{ dot3 }}"></span><span style="width:7px;height:7px;border-radius:50%;background:{{ dot4 }}"></span></span></button>
+    <span style="margin-top:10px;font-size:12px;color:#6B6B6B;letter-spacing:.04em">{{ t.heroCtaSub }}</span>
+    <div style="width:44px;height:3px;background:#D7141A;margin:22px 0 24px"></div>
     <p style="margin:0;font-size:17px;line-height:1.75;color:#3F3F3F;font-weight:300;text-wrap:pretty;max-width:52ch">{{ t.i1 }}<b style="color:#D7141A;font-weight:700">{{ t.i2 }}</b>{{ t.i3 }}<b style="color:#D7141A;font-weight:700">4</b>{{ t.i4 }}<b style="color:#D7141A;font-weight:700">4</b>{{ t.i5 }}</p>
 
     <div style="width:100%;margin-top:32px;background:#0E0E0E;color:#fff;padding:30px 28px 26px;position:relative">
@@ -444,7 +446,7 @@ const T = {
     s1a: 'Composez', s1b: 'Choisissez 4 parfums de 20 ml dans la collection.', s2a: 'Commandez', s2b: 'Nom, téléphone, ville. Nous vous appelons pour confirmer.', s3a: 'Payez à réception', s3b: 'Livraison en 24–72 h. Vous payez en espèces au livreur.',
     revKicker: 'Ils l’ont porté', revTitle: 'Ce qu’ils ont ressenti', faqTitle: 'Questions fréquentes',
     ctaA: 'Créé avec passion,', ctaB: 'porté avec fierté.', ctaP: '4 parfums de 20 ml, livrés chez vous. Payez seulement à la réception.', ctaBtn: 'Composer mon pack', wa: 'WhatsApp',
-    foot: 'Marque indépendante', stickySub: 'Livraison gratuite · paiement à la livraison', ctaChoose: 'Choisir mes parfums →', ctaNext: n => `Encore ${n} à choisir →`, ctaFinish: 'Finaliser ma commande →',
+    foot: 'Marque indépendante', stickySub: 'Livraison gratuite · paiement à la livraison', ctaChoose: 'Choisir mes parfums →', heroCtaSub: 'Livraison gratuite · Paiement à la livraison', ctaNext: n => `Encore ${n} à choisir →`, ctaFinish: 'Finaliser ma commande →',
     pick: n => `Parfum ${n} sur 4`, fam: { m: 'Homme', f: 'Femme', u: 'Unisexe' },
     received: 'Commande reçue', thanks: n => `Merci ${n} !`, callA: 'Nous vous appelons au', callB: c => `pour confirmer la livraison à ${c}.`,
     confirmWa: 'Confirmer sur WhatsApp', close: 'Fermer',
@@ -471,7 +473,7 @@ const T = {
     s1a: 'Build', s1b: 'Choose 4 perfumes of 20 ml from the collection.', s2a: 'Order', s2b: 'Name, phone, city. We call you to confirm.', s3a: 'Pay on arrival', s3b: 'Delivered in 24–72 h. Pay the courier in cash.',
     revKicker: 'They wore it', revTitle: 'How it made them feel', faqTitle: 'Frequently asked questions',
     ctaA: 'Made with passion,', ctaB: 'worn with pride.', ctaP: '4 perfumes of 20 ml, delivered to your door. Pay only when it arrives.', ctaBtn: 'Build my pack', wa: 'WhatsApp',
-    foot: 'Independent brand', stickySub: 'Free delivery · cash on delivery', ctaChoose: 'Choose my perfumes →', ctaNext: n => `${n} more to choose →`, ctaFinish: 'Complete my order →',
+    foot: 'Independent brand', stickySub: 'Free delivery · cash on delivery', ctaChoose: 'Choose my perfumes →', heroCtaSub: 'Free delivery · Cash on delivery', ctaNext: n => `${n} more to choose →`, ctaFinish: 'Complete my order →',
     pick: n => `Perfume ${n} of 4`, fam: { m: 'Men', f: 'Women', u: 'Unisex' },
     received: 'Order received', thanks: n => `Thank you ${n}!`, callA: 'We will call you at', callB: c => `to confirm delivery to ${c}.`,
     confirmWa: 'Confirm on WhatsApp', close: 'Close',
@@ -498,7 +500,7 @@ const T = {
     s1a: 'اختر', s1b: 'اختر 4 عطور بحجم 20 مل من المجموعة.', s2a: 'اطلب', s2b: 'الاسم، الهاتف، المدينة. نتصل بك للتأكيد.', s3a: 'ادفع عند الاستلام', s3b: 'التوصيل خلال 24–72 ساعة. تدفع نقداً لعامل التوصيل.',
     revKicker: 'جرّبوه', revTitle: 'إحساس لا يُنسى', faqTitle: 'الأسئلة الشائعة',
     ctaA: 'صُنع بشغف،', ctaB: 'يُرتدى بفخر.', ctaP: '4 عطور بحجم 20 مل تصلك إلى باب منزلك. ادفع فقط عند الاستلام.', ctaBtn: 'كوّن باقتي', wa: 'واتساب',
-    foot: 'علامة مستقلة', stickySub: 'توصيل مجاني · الدفع عند الاستلام', ctaChoose: 'اختر عطورك ←', ctaNext: n => `بقي ${n} للاختيار ←`, ctaFinish: 'أكمل طلبك ←',
+    foot: 'علامة مستقلة', stickySub: 'توصيل مجاني · الدفع عند الاستلام', ctaChoose: 'اختر عطورك ←', heroCtaSub: 'توصيل مجاني · الدفع عند الاستلام', ctaNext: n => `بقي ${n} للاختيار ←`, ctaFinish: 'أكمل طلبك ←',
     pick: n => `العطر ${n} من 4`, fam: { m: 'رجالي', f: 'نسائي', u: 'للجنسين' },
     received: 'تم استلام طلبك', thanks: n => `شكراً ${n}!`, callA: 'سنتصل بك على الرقم', callB: c => `لتأكيد التوصيل إلى ${c}.`,
     confirmWa: 'التأكيد عبر واتساب', close: 'إغلاق',
@@ -744,6 +746,9 @@ class Component extends DCLogic {
       closePicker: () => this.setState({ picking: null }),
       stop: e => e.stopPropagation(),
       faqs: t.faqs.map(([q, a], i) => ({ q, a, open: faq === i, sign: faq === i ? '−' : '+', toggle: () => this.setState({ faq: faq === i ? -1 : i }) })),
+      openPickerTop: () => this.scrollToOrder(),
+      heroCta: (() => { const c = pack.filter(Boolean).length; return c === 0 ? t.ctaChoose.replace(/\s*[→←]$/, '') : c < 4 ? t.ctaNext(4 - c).replace(/\s*[→←]$/, '') : t.ctaFinish.replace(/\s*[→←]$/, ''); })(),
+      dot1: pack[0] ? '#fff' : 'rgba(255,255,255,.35)', dot2: pack[1] ? '#fff' : 'rgba(255,255,255,.35)', dot3: pack[2] ? '#fff' : 'rgba(255,255,255,.35)', dot4: pack[3] ? '#fff' : 'rgba(255,255,255,.35)',
       stickyCta: (() => { const c = pack.filter(Boolean).length; return c === 0 ? t.ctaChoose : c < 4 ? t.ctaNext(4 - c) : t.ctaFinish; })(),
       showSticky: sticky && !done && picking === null,
       done,
