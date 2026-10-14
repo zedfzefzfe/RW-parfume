@@ -119,8 +119,8 @@ input,button{font-family:inherit}
 <main id="top">
 <section id="order" style="max-width:1400px;margin:0 auto;padding:{{ orderPad }};display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr));gap:56px;align-items:start">
 
-  <div style="display:flex;gap:{{ galGap }};position:{{ galleryPos }};top:120px">
-    <div style="flex:none;width:{{ thumbW }};position:relative;align-self:stretch"><div style="position:absolute;inset:0;display:flex;flex-direction:column;gap:12px;overflow-y:auto;scrollbar-width:none">
+  <div style="display:flex;flex-direction:{{ galDir }};gap:{{ galGap }};position:{{ galleryPos }};top:120px;margin:{{ galMargin }};min-width:0">
+    <div style="flex:none;width:{{ thumbColW }};position:{{ thumbColPos }};align-self:stretch;padding:{{ thumbColPad }}"><div style="position:{{ thumbInnerPos }};inset:0;display:flex;flex-direction:{{ thumbDir }};gap:{{ thumbGap }};overflow-x:auto;overflow-y:auto;scrollbar-width:none">
       <sc-for list="{{ thumbs }}" as="t" hint-placeholder-count="4">
         <button onClick="{{ t.select }}" style="flex:none;width:{{ thumbW }};height:{{ thumbH }};padding:0;border:{{ t.border }};background:#F5F4F1;cursor:pointer;display:block;position:relative;overflow:hidden;opacity:{{ t.thumbOpacity }};transition:opacity .4s ease, border-color .4s ease">
           <div style="position:absolute;inset:0;pointer-events:none">
@@ -646,8 +646,12 @@ class Component extends DCLogic {
       submitLabel: this.state.sending ? t.sending : `${t.orderNow} — ${200 * qty} ${t.cur} ${t.arrow}`,
       galleryPos: this.state.mobile ? 'static' : 'sticky',
       orderPad: this.state.phone ? '24px 16px 64px' : '40px 32px 72px',
-      mainAspect: this.state.phone ? '2/3' : '4/5', galGap: this.state.phone ? '10px' : '16px',
-      thumbW: this.state.phone ? '58px' : '76px', thumbH: this.state.phone ? '72px' : '92px',
+      mainAspect: this.state.phone ? '1/1' : '4/5', galGap: this.state.phone ? '12px' : '16px',
+      thumbW: this.state.phone ? '62px' : '76px', thumbH: this.state.phone ? '62px' : '92px',
+      galDir: this.state.phone ? 'column-reverse' : 'row', galMargin: this.state.phone ? '-24px -16px 0' : '0',
+      thumbColW: this.state.phone ? 'auto' : '76px', thumbColPos: this.state.phone ? 'static' : 'relative',
+      thumbInnerPos: this.state.phone ? 'static' : 'absolute', thumbDir: this.state.phone ? 'row' : 'column',
+      thumbGap: this.state.phone ? '10px' : '12px', thumbColPad: this.state.phone ? '0 16px' : '0',
       thumbs: PH.map((ph, i) => ({
         n: String(i + 1).padStart(2, '0'), ph, slotId: i === 0 ? 'rw-gallery-0' : 'rw-life-' + i, src: GAL[i],
         border: i === active ? '1.5px solid #0E0E0E' : '1px solid #ECEAE5',
