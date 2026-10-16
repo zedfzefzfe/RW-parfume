@@ -56,7 +56,7 @@ input,button{font-family:inherit}
   <div style="max-width:1400px;margin:0 auto;padding:14px 32px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px">
     <sc-if value="{{ notPhone }}" hint-placeholder-val="{{ true }}">
     <nav style="display:flex;gap:32px;flex-wrap:wrap;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase">
-      <a href="#order">{{ t.navShop }}</a>
+      <a href="#rw-packs" data-rw-tap="1" onClick="{{ goPacks }}">{{ t.navShop }}</a>
       <a href="#avis">{{ t.navReviews }}</a>
       <a href="#faq">{{ t.navAbout }}</a>
     </nav>
@@ -96,7 +96,7 @@ input,button{font-family:inherit}
           </div>
         </sc-if>
       </div>
-      <button data-rw-tap="1" onClick="{{ scrollToOrder }}" style="position:relative;background:none;border:none;cursor:pointer;padding:6px;display:flex">
+      <button data-rw-tap="1" onClick="{{ goPacks }}" style="position:relative;background:none;border:none;cursor:pointer;padding:6px;display:flex">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0E0E0E" stroke-width="1.6"><path d="M5 8h14l-1.2 12H6.2L5 8z"></path><path d="M9 8V6a3 3 0 0 1 6 0v2"></path></svg>
         <span style="position:absolute;top:0;right:-4px;min-width:18px;height:18px;border-radius:9px;background:#D7141A;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 4px;font-family:Manrope,sans-serif">{{ packCount }}</span>
       </button>
@@ -104,10 +104,10 @@ input,button{font-family:inherit}
   </div>
   <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
     <nav onClick="{{ closeMenu }}" style="position:absolute;top:100%;left:0;right:0;background:#fff;border-top:1px solid #ECEAE5;box-shadow:0 18px 40px rgba(0,0,0,.12);display:flex;flex-direction:column;padding:8px 24px 24px">
-      <a href="#order" style="display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid #ECEAE5;font-size:15px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#0E0E0E"><span>{{ t.navShop }}</span><span style="color:#D7141A">→</span></a>
+      <a href="#rw-packs" data-rw-tap="1" onClick="{{ goPacks }}" style="display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid #ECEAE5;font-size:15px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#0E0E0E"><span>{{ t.navShop }}</span><span style="color:#D7141A">→</span></a>
       <a href="#avis" style="display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid #ECEAE5;font-size:15px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#0E0E0E"><span>{{ t.navReviews }}</span><span style="color:#D7141A">→</span></a>
       <a href="#faq" style="display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid #ECEAE5;font-size:15px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#0E0E0E"><span>{{ t.navAbout }}</span><span style="color:#D7141A">→</span></a>
-      <a href="#order" style="margin-top:20px;display:flex;justify-content:center;align-items:center;height:52px;background:#D7141A;color:#fff;font-size:14px;font-weight:800;letter-spacing:.16em;text-transform:uppercase">{{ t.orderNow }}</a>
+      <a href="#rw-packs" data-rw-tap="1" onClick="{{ goPacks }}" style="margin-top:20px;display:flex;justify-content:center;align-items:center;height:52px;background:#D7141A;color:#fff;font-size:14px;font-weight:800;letter-spacing:.16em;text-transform:uppercase">{{ t.orderNow }}</a>
     </nav>
   </sc-if>
 </header>
@@ -299,8 +299,8 @@ input,button{font-family:inherit}
   <h2 style="margin:0 auto;max-width:18ch;font-size:clamp(34px,4.4vw,64px);font-weight:800;text-transform:uppercase;line-height:1.1">{{ t.ctaA }} <span style="font-family:{{ accentFont }};font-style:{{ accentStyle }};font-weight:400;text-transform:none;color:#D7141A">{{ t.ctaB }}</span></h2>
   <p style="margin:22px auto 34px;font-size:17px;color:#E6E6E6;max-width:46ch">{{ t.ctaP }}</p>
   <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;pointer-events:auto">
-    <button data-rw-tap="1" onClick="{{ scrollToOrder }}" style="height:60px;padding:0 36px;background:#D7141A;color:#fff;border:none;font-size:15px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;cursor:pointer" style-hover="background:#fff;color:#0E0E0E">{{ t.ctaBtn }} — 200 {{ t.cur }}</button>
-    <button data-rw-tap="1" onClick="{{ scrollToOrder }}" style="height:60px;padding:0 30px;background:transparent;border:1.5px solid #fff;color:#fff;font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:10px" style-hover="background:#fff;color:#0E0E0E">{{ t.orderNow }} <span>{{ t.arrow }}</span></button>
+    <button data-rw-tap="1" onClick="{{ goPacks }}" style="height:60px;padding:0 36px;background:#D7141A;color:#fff;border:none;font-size:15px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;cursor:pointer" style-hover="background:#fff;color:#0E0E0E">{{ t.ctaBtn }} — 200 {{ t.cur }}</button>
+    <button data-rw-tap="1" onClick="{{ goPacks }}" style="height:60px;padding:0 30px;background:transparent;border:1.5px solid #fff;color:#fff;font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:10px" style-hover="background:#fff;color:#0E0E0E">{{ t.orderNow }} <span>{{ t.arrow }}</span></button>
   </div>
   </div>
 </section>
@@ -314,7 +314,7 @@ input,button{font-family:inherit}
 <sc-if value="{{ showSticky }}" hint-placeholder-val="{{ false }}">
   <div style="position:fixed;left:0;right:0;bottom:0;z-index:45;background:#fff;border-top:1px solid #ECEAE5;box-shadow:0 -10px 30px rgba(0,0,0,.08);padding:12px 24px;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap">
     <div style="display:flex;flex-direction:column"><span style="font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.08em">{{ t.title }} · {{ packCount }}/4</span><span style="font-size:12px;color:#6B6B6B">{{ t.stickySub }}</span></div>
-    <button data-rw-tap="1" onClick="{{ scrollToOrder }}" style="height:50px;padding:0 28px;background:#D7141A;color:#fff;border:none;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;cursor:pointer">{{ stickyCta }}</button>
+    <button data-rw-tap="1" onClick="{{ goPacks }}" style="height:50px;padding:0 28px;background:#D7141A;color:#fff;border:none;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;cursor:pointer">{{ stickyCta }}</button>
   </div>
 </sc-if>
 
@@ -835,7 +835,7 @@ class Component extends DCLogic {
       stop: e => e.stopPropagation(),
       faqs: t.faqs.map(([q, a], i) => ({ q, a, open: faq === i, sign: faq === i ? '−' : '+', toggle: () => this.setState({ faq: faq === i ? -1 : i }) })),
       openPickerTop: () => { if (this.state.preset) this.setState({ pack: [null, null, null, null], preset: null, picking: 0, checkout: false }); else this.scrollToOrder(); },
-      goPacks: () => { const el = document.getElementById('rw-packs'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 90, behavior: 'smooth' }); },
+      goPacks: e => { if (e && e.preventDefault) e.preventDefault(); if (this.state.menuOpen || this.state.checkout || this.state.picking !== null) this.setState({ menuOpen: false, checkout: false, picking: null }); const el = document.getElementById('rw-packs'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 90, behavior: 'smooth' }); },
       presets: PRESETS.map(pr => ({
         title: t.packNames[pr.key],
         names: pr.ids.map(id => this.find(id).name).join(' · '),
