@@ -132,7 +132,7 @@ input,button{font-family:inherit}
     </sc-if>
     <div style="flex:1;min-width:0;position:relative;aspect-ratio:{{ mainAspect }};background:#F2F1EE">
       <div style="position:absolute;left:0;right:0;bottom:0;z-index:6;padding:56px 16px 16px;background:linear-gradient(180deg,rgba(14,14,14,0) 0%,rgba(14,14,14,.55) 100%);display:flex;justify-content:center;pointer-events:none">
-        <button data-rw-tap="1" onClick="{{ openPickerTop }}" style="pointer-events:auto;height:52px;padding:0 26px;border:none;background:#fff;color:#0E0E0E;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;box-shadow:0 10px 26px rgba(0,0,0,.25);touch-action:manipulation;-webkit-tap-highlight-color:rgba(0,0,0,.15);font-family:Manrope,sans-serif"><span style="pointer-events:none">{{ heroCta }}</span><span style="pointer-events:none;color:#D7141A;font-size:16px">{{ t.arrow }}</span></button>
+        <button data-rw-tap="1" onClick="{{ goPacks }}" style="pointer-events:auto;height:52px;padding:0 26px;border:none;background:#fff;color:#0E0E0E;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;box-shadow:0 10px 26px rgba(0,0,0,.25);touch-action:manipulation;-webkit-tap-highlight-color:rgba(0,0,0,.15);font-family:Manrope,sans-serif"><span style="pointer-events:none">{{ t.photoCta }}</span><span style="pointer-events:none;color:#D7141A;font-size:16px">{{ t.arrow }}</span></button>
       </div>
       <sc-for list="{{ thumbs }}" as="t" hint-placeholder-count="1">
         <div style="position:absolute;inset:0;opacity:{{ t.opacity }};z-index:{{ t.z }};transition:opacity 1.2s ease">
@@ -153,7 +153,22 @@ input,button{font-family:inherit}
       <span style="font-size:34px;font-weight:800">{{ price }} {{ t.cur }}</span>
       <span style="font-size:18px;color:#9A9893;text-decoration:line-through">{{ oldPrice }} {{ t.cur }}</span><span style="font-size:12px;font-weight:800;letter-spacing:.08em;color:#fff;background:#D7141A;padding:5px 9px;align-self:center">-43%</span>
     </div>
-    <button data-rw-tap="1" onClick="{{ openPickerTop }}" style="margin-top:20px;width:100%;max-width:420px;height:58px;border:none;background:#D7141A;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:12px;font-size:14px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;box-shadow:0 10px 24px rgba(215,20,26,.28);transition:background .2s;touch-action:manipulation;-webkit-tap-highlight-color:rgba(0,0,0,.15)"><span style="pointer-events:none">{{ heroCta }}</span><span style="display:flex;gap:4px;pointer-events:none"><span style="width:7px;height:7px;border-radius:50%;background:{{ dot1 }}"></span><span style="width:7px;height:7px;border-radius:50%;background:{{ dot2 }}"></span><span style="width:7px;height:7px;border-radius:50%;background:{{ dot3 }}"></span><span style="width:7px;height:7px;border-radius:50%;background:{{ dot4 }}"></span></span></button>
+    <div id="rw-packs" style="margin-top:22px;width:100%;max-width:460px;display:flex;flex-direction:column;gap:10px">
+      <span style="font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#0E0E0E">{{ t.packsTitle }}</span>
+      <sc-for list="{{ presets }}" as="k" hint-placeholder-count="3">
+        <button data-rw-tap="1" onClick="{{ k.choose }}" style="width:100%;display:flex;align-items:center;gap:12px;padding:10px;background:#fff;border:1.5px solid #0E0E0E;cursor:pointer;text-align:start;touch-action:manipulation;-webkit-tap-highlight-color:rgba(0,0,0,.08);font-family:Manrope,sans-serif">
+          <span style="flex:none;width:76px;height:76px;display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#ECEAE5;pointer-events:none">
+            <img src="{{ k.i1 }}" alt="" style="width:100%;height:100%;object-fit:cover;display:block"><img src="{{ k.i2 }}" alt="" style="width:100%;height:100%;object-fit:cover;display:block"><img src="{{ k.i3 }}" alt="" style="width:100%;height:100%;object-fit:cover;display:block"><img src="{{ k.i4 }}" alt="" style="width:100%;height:100%;object-fit:cover;display:block">
+          </span>
+          <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;pointer-events:none">
+            <span style="font-size:15px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#0E0E0E">{{ k.title }}</span>
+            <span style="font-size:11px;line-height:1.35;color:#6B6B6B;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">{{ k.names }}</span>
+          </span>
+          <span style="flex:none;height:40px;padding:0 14px;background:#D7141A;color:#fff;display:flex;align-items:center;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;pointer-events:none">{{ t.packGo }}</span>
+        </button>
+      </sc-for>
+    </div>
+    <button data-rw-tap="1" onClick="{{ openPickerTop }}" style="margin-top:12px;width:100%;max-width:460px;height:50px;border:1px solid #DAD8D2;background:#fff;color:#0E0E0E;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;touch-action:manipulation;-webkit-tap-highlight-color:rgba(0,0,0,.08)"><span style="pointer-events:none">{{ customCta }}</span><span style="display:flex;gap:4px;pointer-events:none"><span style="width:6px;height:6px;border-radius:50%;background:{{ cdot1 }}"></span><span style="width:6px;height:6px;border-radius:50%;background:{{ cdot2 }}"></span><span style="width:6px;height:6px;border-radius:50%;background:{{ cdot3 }}"></span><span style="width:6px;height:6px;border-radius:50%;background:{{ cdot4 }}"></span></span></button>
     <span style="margin-top:10px;font-size:12px;color:#6B6B6B;letter-spacing:.04em">{{ t.heroCtaSub }}</span>
     <div style="width:44px;height:3px;background:#D7141A;margin:22px 0 24px"></div>
     <p style="margin:0;font-size:17px;line-height:1.75;color:#3F3F3F;font-weight:300;text-wrap:pretty;max-width:52ch">{{ t.i1 }}<b style="color:#D7141A;font-weight:700">{{ t.i2 }}</b>{{ t.i3 }}<b style="color:#D7141A;font-weight:700">4</b>{{ t.i4 }}<b style="color:#D7141A;font-weight:700">4</b>{{ t.i5 }}</p>
@@ -393,7 +408,12 @@ input,button{font-family:inherit}
           <div style="font-size:13px;font-weight:600;color:#D7141A">{{ errorMsg }}</div>
         </sc-if>
         <button data-rw-tap="1" onClick="{{ submit }}" style="width:100%;margin-top:4px;height:60px;background:#D7141A;color:#fff;border:none;font-size:15px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:12px;box-shadow:0 10px 24px rgba(215,20,26,.28)">{{ submitLabel }}</button>
-        <span style="font-size:12px;color:#6B6B6B;text-align:center">{{ t.heroCtaSub }}</span>
+        <span style="font-size:12px;line-height:1.45;color:#3F3F3F;text-align:center;background:#F5F4F1;padding:10px 12px">{{ t.coPersonal }}</span>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:2px">
+          <div style="display:flex;align-items:center;gap:8px;padding:10px;border:1px solid #ECEAE5;font-size:11px;font-weight:700;line-height:1.3;color:#0E0E0E"><span style="flex:none;width:8px;height:8px;border-radius:50%;background:#D7141A"></span>{{ t.trCod }}</div>
+          <div style="display:flex;align-items:center;gap:8px;padding:10px;border:1px solid #ECEAE5;font-size:11px;font-weight:700;line-height:1.3;color:#0E0E0E"><span style="flex:none;width:8px;height:8px;border-radius:50%;background:#D7141A"></span>{{ t.trShip }}</div>
+        </div>
+        <a href="https://wa.me/212691102214" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border:1px solid #DAD8D2;color:#0E0E0E;font-size:12px;font-weight:700;text-decoration:none"><svg width="16" height="16" viewBox="0 0 24 24" fill="#25D366"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 2 1.1.9 2 1.2 2.3 1.4.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.2z"></path></svg>{{ t.trWa }}</a>
       </div>
     </div>
   </div>
@@ -470,6 +490,11 @@ const PERFUMES = [
   { id: 'u-ammerat-al-arab', name: "Ammerat Al Arab", fam: 'u', brand: "Lattafa" },
   { id: 'u-kirke', name: "Kirke", fam: 'u', brand: "Tiziana Terenzi" }
 ];
+const PRESETS = [
+  { key: 'femme', ids: ['f-la-vie-est-belle', 'f-black-opium', 'f-libre', 'f-good-girl-midnight'] },
+  { key: 'homme', ids: ['m-sauvage', 'm-bleu-de-chanel', 'm-aventus', 'm-invictus'] },
+  { key: 'mixte', ids: ['f-la-vie-est-belle', 'f-black-opium', 'm-sauvage', 'm-bleu-de-chanel'] }
+];
 const PH = ['Photo du coffret', 'Homme', 'Femme', 'Homme', 'Femme', 'Homme'];
 const GAL = ['./gallery-0.webp', './life-homme-blanc.jpg', './life-femme-rochers.jpg', './life-homme-noir.jpg', './life-femme-rire.jpg', './life-homme-raye.jpg'];
 const WA = '212691102214';
@@ -493,7 +518,7 @@ const T = {
     s1a: 'Composez', s1b: 'Choisissez 4 parfums de 20 ml dans la collection.', s2a: 'Commandez', s2b: 'Nom, téléphone, ville. Nous vous appelons pour confirmer.', s3a: 'Payez à réception', s3b: 'Livraison en 24–72 h. Vous payez en espèces au livreur.',
     revKicker: 'Ils l’ont porté', revTitle: 'Ce qu’ils ont ressenti', faqTitle: 'Questions fréquentes',
     ctaA: 'Créé avec passion,', ctaB: 'porté avec fierté.', ctaP: '4 parfums de 20 ml, livrés chez vous. Payez seulement à la réception.', ctaBtn: 'Composer mon pack', wa: 'WhatsApp',
-    foot: 'Marque indépendante', stickySub: 'Livraison gratuite · paiement à la livraison', ctaChoose: 'Choisir mes parfums →', coKicker: 'Dernière étape', coTitle: 'Vos informations de livraison', coEdit: 'Modifier mes parfums', heroCtaSub: 'Livraison gratuite · Paiement à la livraison', ctaNext: n => `Encore ${n} à choisir →`, ctaFinish: 'Finaliser ma commande →',
+    foot: 'Marque indépendante', stickySub: 'Livraison gratuite · paiement à la livraison', ctaChoose: 'Choisir mes parfums →', packsTitle: 'Choisissez votre pack', packGo: 'Choisir', packNames: { femme: 'Pack Femme', homme: 'Pack Homme', mixte: 'Pack Mixte' }, customCta: 'Composer mon pack moi-même', photoCta: 'Voir les packs', coPersonal: 'Vous pourrez personnaliser vos 4 parfums lors de l’appel de confirmation.', trCod: 'Paiement à la livraison', trShip: 'Livraison gratuite partout au Maroc', trWa: 'Une question ? Écrivez-nous', coKicker: 'Dernière étape', coTitle: 'Vos informations de livraison', coEdit: 'Modifier mes parfums', heroCtaSub: 'Livraison gratuite · Paiement à la livraison', ctaNext: n => `Encore ${n} à choisir →`, ctaFinish: 'Finaliser ma commande →',
     pick: n => `Parfum ${n} sur 4`, fam: { m: 'Homme', f: 'Femme', u: 'Unisexe' },
     received: 'Commande reçue', thanks: n => `Merci ${n} !`, callA: 'Nous vous appelons au', callB: c => `pour confirmer la livraison à ${c}.`,
     confirmWa: 'Confirmer sur WhatsApp', close: 'Fermer',
@@ -520,7 +545,7 @@ const T = {
     s1a: 'Build', s1b: 'Choose 4 perfumes of 20 ml from the collection.', s2a: 'Order', s2b: 'Name, phone, city. We call you to confirm.', s3a: 'Pay on arrival', s3b: 'Delivered in 24–72 h. Pay the courier in cash.',
     revKicker: 'They wore it', revTitle: 'How it made them feel', faqTitle: 'Frequently asked questions',
     ctaA: 'Made with passion,', ctaB: 'worn with pride.', ctaP: '4 perfumes of 20 ml, delivered to your door. Pay only when it arrives.', ctaBtn: 'Build my pack', wa: 'WhatsApp',
-    foot: 'Independent brand', stickySub: 'Free delivery · cash on delivery', ctaChoose: 'Choose my perfumes →', coKicker: 'Last step', coTitle: 'Your delivery details', coEdit: 'Edit my perfumes', heroCtaSub: 'Free delivery · Cash on delivery', ctaNext: n => `${n} more to choose →`, ctaFinish: 'Complete my order →',
+    foot: 'Independent brand', stickySub: 'Free delivery · cash on delivery', ctaChoose: 'Choose my perfumes →', packsTitle: 'Choose your pack', packGo: 'Choose', packNames: { femme: 'Women Pack', homme: 'Men Pack', mixte: 'Mixed Pack' }, customCta: 'Build my own pack', photoCta: 'See the packs', coPersonal: 'You can personalise your 4 perfumes during the confirmation call.', trCod: 'Cash on delivery', trShip: 'Free delivery all over Morocco', trWa: 'A question? Message us', coKicker: 'Last step', coTitle: 'Your delivery details', coEdit: 'Edit my perfumes', heroCtaSub: 'Free delivery · Cash on delivery', ctaNext: n => `${n} more to choose →`, ctaFinish: 'Complete my order →',
     pick: n => `Perfume ${n} of 4`, fam: { m: 'Men', f: 'Women', u: 'Unisex' },
     received: 'Order received', thanks: n => `Thank you ${n}!`, callA: 'We will call you at', callB: c => `to confirm delivery to ${c}.`,
     confirmWa: 'Confirm on WhatsApp', close: 'Close',
@@ -547,7 +572,7 @@ const T = {
     s1a: 'اختر', s1b: 'اختر 4 عطور بحجم 20 مل من المجموعة.', s2a: 'اطلب', s2b: 'الاسم، الهاتف، المدينة. نتصل بك للتأكيد.', s3a: 'ادفع عند الاستلام', s3b: 'التوصيل خلال 24–72 ساعة. تدفع نقداً لعامل التوصيل.',
     revKicker: 'جرّبوه', revTitle: 'إحساس لا يُنسى', faqTitle: 'الأسئلة الشائعة',
     ctaA: 'صُنع بشغف،', ctaB: 'يُرتدى بفخر.', ctaP: '4 عطور بحجم 20 مل تصلك إلى باب منزلك. ادفع فقط عند الاستلام.', ctaBtn: 'كوّن باقتي', wa: 'واتساب',
-    foot: 'علامة مستقلة', stickySub: 'توصيل مجاني · الدفع عند الاستلام', ctaChoose: 'اختر عطورك ←', coKicker: 'الخطوة الأخيرة', coTitle: 'معلومات التوصيل', coEdit: 'تعديل العطور', heroCtaSub: 'توصيل مجاني · الدفع عند الاستلام', ctaNext: n => `بقي ${n} للاختيار ←`, ctaFinish: 'أكمل طلبك ←',
+    foot: 'علامة مستقلة', stickySub: 'توصيل مجاني · الدفع عند الاستلام', ctaChoose: 'اختر عطورك ←', packsTitle: 'اختر باقتك', packGo: 'اختيار', packNames: { femme: 'باقة نسائية', homme: 'باقة رجالية', mixte: 'باقة مختلطة' }, customCta: 'كوّن باقتي بنفسي', photoCta: 'شاهد الباقات', coPersonal: 'يمكنك تخصيص عطورك الأربعة أثناء مكالمة التأكيد.', trCod: 'الدفع عند الاستلام', trShip: 'توصيل مجاني لكل المغرب', trWa: 'سؤال؟ راسلنا', coKicker: 'الخطوة الأخيرة', coTitle: 'معلومات التوصيل', coEdit: 'تعديل العطور', heroCtaSub: 'توصيل مجاني · الدفع عند الاستلام', ctaNext: n => `بقي ${n} للاختيار ←`, ctaFinish: 'أكمل طلبك ←',
     pick: n => `العطر ${n} من 4`, fam: { m: 'رجالي', f: 'نسائي', u: 'للجنسين' },
     received: 'تم استلام طلبك', thanks: n => `شكراً ${n}!`, callA: 'سنتصل بك على الرقم', callB: c => `لتأكيد التوصيل إلى ${c}.`,
     confirmWa: 'التأكيد عبر واتساب', close: 'إغلاق',
@@ -666,9 +691,10 @@ class Component extends DCLogic {
       quantity: qty,
       total: `${200 * qty} dhs`,
       perfumes: items.join('\n'),
+      pack_type: (() => { const pr = PRESETS.find(p => p.ids.join() === pack.join()); return pr ? ({ femme: 'Pack Femme', homme: 'Pack Homme', mixte: 'Pack Mixte' })[pr.key] : 'Pack personnalisé'; })(),
       language: this.state.lang,
       order_date: new Date().toLocaleString('fr-MA'),
-      message: `Nouvelle commande — ${qty} × Pack Signature (${200 * qty} dhs)\n\n${items.join('\n')}\n\nNom : ${form.name}\nTéléphone : ${form.phone}\nVille : ${form.city}`
+      message: `Nouvelle commande — ${qty} × Pack Signature (${200 * qty} dhs) — ${(PRESETS.find(p => p.ids.join() === pack.join()) || { key: 'perso' }).key.toUpperCase()}\n\n${items.join('\n')}\n\nNom : ${form.name}\nTéléphone : ${form.phone}\nVille : ${form.city}`
     };
     const pick = (v, d) => (v && !String(v).startsWith('YOUR_')) ? v : d;
     const service = pick(this.props.emailjsServiceId, 'service_47yxzpn');
@@ -766,7 +792,7 @@ class Component extends DCLogic {
         pick: () => {
           const next = [...pack]; next[picking] = p.id;
           const nextEmpty = next.indexOf(null);
-          this.setState({ pack: next, picking: nextEmpty === -1 ? null : nextEmpty, errKey: null }, () => { if (nextEmpty === -1) { this.trackAddToCart(next); setTimeout(() => this.scrollToOrder(), 350); } });
+          this.setState({ pack: next, preset: null, picking: nextEmpty === -1 ? null : nextEmpty, errKey: null }, () => { if (nextEmpty === -1) { this.trackAddToCart(next); setTimeout(() => this.scrollToOrder(), 350); } });
         }
       })),
       stepLabel: t.step((picking ?? 0) + 1),
@@ -800,7 +826,7 @@ class Component extends DCLogic {
           pick: () => {
             const next = [...pack]; next[picking] = p.id;
             const nextEmpty = next.indexOf(null);
-            this.setState({ pack: next, picking: nextEmpty === -1 ? null : nextEmpty, errKey: null }, () => { if (nextEmpty === -1) { this.trackAddToCart(next); setTimeout(() => this.scrollToOrder(), 350); } });
+            this.setState({ pack: next, preset: null, picking: nextEmpty === -1 ? null : nextEmpty, errKey: null }, () => { if (nextEmpty === -1) { this.trackAddToCart(next); setTimeout(() => this.scrollToOrder(), 350); } });
           }
         };
       }),
@@ -808,7 +834,16 @@ class Component extends DCLogic {
       closePicker: () => this.setState({ picking: null }),
       stop: e => e.stopPropagation(),
       faqs: t.faqs.map(([q, a], i) => ({ q, a, open: faq === i, sign: faq === i ? '−' : '+', toggle: () => this.setState({ faq: faq === i ? -1 : i }) })),
-      openPickerTop: () => this.scrollToOrder(),
+      openPickerTop: () => { if (this.state.preset) this.setState({ pack: [null, null, null, null], preset: null, picking: 0, checkout: false }); else this.scrollToOrder(); },
+      goPacks: () => { const el = document.getElementById('rw-packs'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 90, behavior: 'smooth' }); },
+      presets: PRESETS.map(pr => ({
+        title: t.packNames[pr.key],
+        names: pr.ids.map(id => this.find(id).name).join(' · '),
+        i1: `./pt-${pr.ids[0]}.jpg`, i2: `./pt-${pr.ids[1]}.jpg`, i3: `./pt-${pr.ids[2]}.jpg`, i4: `./pt-${pr.ids[3]}.jpg`,
+        choose: () => { const ids = [...pr.ids]; this.setState({ pack: ids, preset: pr.key, picking: null, errKey: null, checkout: true, menuOpen: false }); this._atcSent = false; this.trackAddToCart(ids); }
+      })),
+      customCta: this.state.preset ? t.customCta : (() => { const c = pack.filter(Boolean).length; return c === 0 ? t.customCta : c < 4 ? t.ctaNext(4 - c).replace(/\s*[→←]$/, '') : t.ctaFinish.replace(/\s*[→←]$/, ''); })(),
+      cdot1: !this.state.preset && pack[0] ? '#D7141A' : '#DAD8D2', cdot2: !this.state.preset && pack[1] ? '#D7141A' : '#DAD8D2', cdot3: !this.state.preset && pack[2] ? '#D7141A' : '#DAD8D2', cdot4: !this.state.preset && pack[3] ? '#D7141A' : '#DAD8D2',
       heroCta: (() => { const c = pack.filter(Boolean).length; return c === 0 ? t.ctaChoose.replace(/\s*[→←]$/, '') : c < 4 ? t.ctaNext(4 - c).replace(/\s*[→←]$/, '') : t.ctaFinish.replace(/\s*[→←]$/, ''); })(),
       dot1: pack[0] ? '#fff' : 'rgba(255,255,255,.35)', dot2: pack[1] ? '#fff' : 'rgba(255,255,255,.35)', dot3: pack[2] ? '#fff' : 'rgba(255,255,255,.35)', dot4: pack[3] ? '#fff' : 'rgba(255,255,255,.35)',
       stickyCta: (() => { const c = pack.filter(Boolean).length; return c === 0 ? t.ctaChoose : c < 4 ? t.ctaNext(4 - c) : t.ctaFinish; })(),
