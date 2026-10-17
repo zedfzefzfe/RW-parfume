@@ -263,7 +263,7 @@ input,button{font-family:inherit}
 </sc-if>
 
 <sc-if value="{{ picking }}" hint-placeholder-val="{{ false }}">
-  <div data-rw-tap="1" onClick="{{ closePicker }}" style="position:fixed;inset:0;z-index:60;background:rgba(14,14,14,.5);backdrop-filter:blur(6px);display:flex;align-items:{{ modalAlign }};justify-content:center;padding:{{ modalOuter }};animation:rwFade .35s ease both">
+  <div onClick="{{ closePicker }}" style="position:fixed;inset:0;z-index:60;background:rgba(14,14,14,.5);backdrop-filter:blur(6px);display:flex;align-items:{{ modalAlign }};justify-content:center;padding:{{ modalOuter }};animation:rwFade .35s ease both">
     <div onClick="{{ stop }}" style="background:#fff;width:100%;max-width:1080px;max-height:{{ modalMaxH }};height:{{ modalH }};border-radius:{{ modalRadius }};overflow:hidden;display:flex;flex-direction:column;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.18);animation:rwRise .5s cubic-bezier(.2,.7,.2,1) both">
       <div style="padding:{{ headPad }};display:flex;flex-direction:column;gap:14px;border-bottom:1px solid #ECEAE5">
         <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
@@ -314,8 +314,8 @@ input,button{font-family:inherit}
 </sc-if>
 
 <sc-if value="{{ checkoutOpen }}" hint-placeholder-val="{{ false }}">
-  <div data-rw-tap="1" onClick="{{ closeCheckout }}" style="position:fixed;inset:0;z-index:65;background:rgba(14,14,14,.55);backdrop-filter:blur(6px);display:flex;align-items:{{ modalAlign }};justify-content:center;padding:{{ modalOuter }};animation:rwFade .3s ease both">
-    <div onClick="{{ stop }}" style="background:#fff;width:100%;max-width:520px;max-height:94vh;overflow:auto;border-radius:{{ modalRadius }};box-shadow:0 30px 80px rgba(0,0,0,.2);animation:rwRise .45s cubic-bezier(.2,.7,.2,1) both;display:flex;flex-direction:column">
+  <div onClick="{{ closeCheckout }}" style="position:fixed;inset:0;z-index:65;background:rgba(14,14,14,.6);display:flex;align-items:{{ modalAlign }};justify-content:center;padding:{{ modalOuter }};animation:rwFade .3s ease both">
+    <div onClick="{{ stop }}" style="background:#fff;width:100%;max-width:520px;max-height:94vh;overflow:auto;-webkit-overflow-scrolling:touch;border-radius:{{ modalRadius }};box-shadow:0 30px 80px rgba(0,0,0,.2);display:flex;flex-direction:column">
       <div style="padding:20px 18px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid #ECEAE5">
         <div style="display:flex;flex-direction:column;gap:3px">
           <span style="font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#D7141A">{{ t.coKicker }}</span>
@@ -564,7 +564,7 @@ class Component extends DCLogic {
     this._ts = null;
     this._onTs = e => { const t = e.touches && e.touches[0]; if (!t) return; this._ts = { x: t.clientX, y: t.clientY, el: e.target.closest && e.target.closest('[data-rw-tap]') }; };
     this._onTe = e => {
-      const s = this._ts; this._ts = null; if (!s || !s.el) return;
+      const s = this._ts; this._ts = null; if (!s || !s.el) return; if (e.target.closest && e.target.closest('input,textarea,select,a')) return;
       const t = e.changedTouches && e.changedTouches[0]; if (!t) return;
       if (Math.abs(t.clientX - s.x) > 10 || Math.abs(t.clientY - s.y) > 10) return;
       const el = e.target.closest && e.target.closest('[data-rw-tap]'); if (el !== s.el) return;
@@ -720,7 +720,7 @@ class Component extends DCLogic {
       inc: () => this.setState({ qty: Math.min(10, qty + 1) }),
       dec: () => this.setState({ qty: Math.max(1, qty - 1) }),
       form,
-      onFieldFocus: () => this.trackInitiateCheckout(),
+      onFieldFocus: e => { this.trackInitiateCheckout(); const el = e && e.target; if (el && this.state.phone) setTimeout(() => { try { const r = el.getBoundingClientRect(); const vh = (window.visualViewport && window.visualViewport.height) || window.innerHeight; if (r.bottom > vh - 20 || r.top < 20) { let p = el.parentElement; while (p && getComputedStyle(p).overflowY !== 'auto') p = p.parentElement; if (p) p.scrollTop += r.top - vh * 0.3; } } catch (x) {} }, 350); },
       setName: e => { this.trackInitiateCheckout(); this.setField('name', e.target.value); },
       setPhone: e => { this.trackInitiateCheckout(); this.setField('phone', e.target.value); },
       setCity: e => { this.trackInitiateCheckout(); this.setField('city', e.target.value); },
@@ -794,6 +794,7 @@ class Component extends DCLogic {
       showSticky: sticky && !done && picking === null && !this.state.checkout,
       checkoutOpen: !!this.state.checkout && !done && picking === null,
       closeCheckout: () => this.setState({ checkout: false }),
+      coAlign: this.state.phone ? 'flex-end' : 'center', coOuter: this.state.phone ? '40px 0 0' : '16px',
       editPack: () => this.setState({ checkout: false, picking: 0 }),
       done,
       thanks: t.thanks(form.name),
